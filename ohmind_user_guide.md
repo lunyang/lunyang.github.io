@@ -7,8 +7,15 @@ has_children: false
 ---
 
 # OHMind User Guide
+{: .no_toc }
 
 A practical tutorial for installing, configuring, and using the OHMind platform for AI‑driven cation design and HEM (Hydroxide Exchange Membrane) workflows.
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ---
 
