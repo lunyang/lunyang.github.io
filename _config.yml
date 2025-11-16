@@ -1,0 +1,10 @@
+title: OHMind Documentation
+description: Documentation for the OHMind platform
+theme: minima
+markdown: kramdown
+permalink: pretty
+
+# Build settings
+exclude:
+  - Gemfile
+  - Gemfile.lock
