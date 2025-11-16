@@ -16,7 +16,7 @@ aux_links:
     - "https://github.com/lunyang/lunyang.github.io"
 
 # Footer content
-footer_content: "Copyright &copy; 2025 OHMind. Distributed under the MIT License."
+footer_content: "<strong>PolyAI Team</strong><br/>Copyright &copy; 2009-2025 Changchun Institute of Applied Chemistry, Chinese Academy of Sciences<br/>Address: No. 5625, Renmin Street, Changchun, Jilin, China. Postal Code: 130022"
 
 # Build settings
 exclude:
