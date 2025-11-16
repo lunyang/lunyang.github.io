@@ -1,8 +1,22 @@
 title: OHMind Documentation
 description: Documentation for the OHMind platform
-theme: minima
+remote_theme: just-the-docs/just-the-docs
 markdown: kramdown
 permalink: pretty
+
+# Logo
+logo: "/logo.png"
+
+# Just the Docs theme settings
+color_scheme: dark # or "light"
+search_enabled: true
+heading_anchors: true
+aux_links:
+  "GitHub Repository":
+    - "https://github.com/lunyang/lunyang.github.io"
+
+# Footer content
+footer_content: "Copyright &copy; 2025 OHMind. Distributed under the MIT License."
 
 # Build settings
 exclude:

@@ -1,7 +1,9 @@
 ---
 layout: default
-title: "OHMind User Guide"
+title: OHMind User Guide
 permalink: /ohmind-user-guide/
+nav_order: 2
+has_children: false
 ---
 
 # OHMind User Guide
