@@ -1,6 +1,20 @@
+---
+layout: default
+title: OHMind User Guide
+nav_order: 2
+---
+
 # OHMind User Guide
+{: .no_toc }
 
 A practical tutorial for installing, configuring, and using the OHMind platform for AI‑driven cation design and HEM (Hydroxide Exchange Membrane) workflows.
+{: .fs-6 .fw-300 }
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ---
 
