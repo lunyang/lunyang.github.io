@@ -1,28 +1,24 @@
 title: OHMind Documentation
 description: Documentation for the OHMind platform
-remote_theme: rundocs/jekyll-rtd-theme
-markdown: kramdown
-permalink: pretty
+remote_theme: carlosperate/jekyll-theme-rtd
+
+# Theme settings
+site_author: PolyAI Team
+repo_url: 'https://github.com/lunyang/lunyang.github.io'
+edit_on_github: false
+sticky_navigation: true
+search_enabled: true
+hljs_style: github-gist
 
 # Logo
 logo: /logo.png
-
-# RTD theme settings
-lang: en
-plugins:
-  - jemoji
-  - jekyll-avatar
-  - jekyll-mentions
-
-# Navigation
-header_pages:
-  - index.md
-  - ohmind_user_guide.md
 
 # Footer content
 footer_content: "<strong>PolyAI Team</strong><br/>Copyright &copy; 2009-2025 Changchun Institute of Applied Chemistry, Chinese Academy of Sciences<br/>Address: No. 5625, Renmin Street, Changchun, Jilin, China. Postal Code: 130022"
 
 # Build settings
+markdown: kramdown
+permalink: pretty
 exclude:
   - Gemfile
   - Gemfile.lock
