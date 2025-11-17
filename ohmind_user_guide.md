@@ -1,21 +1,6 @@
----
-layout: default
-title: OHMind User Guide
-permalink: /ohmind-user-guide/
-nav_order: 2
-has_children: false
----
-
 # OHMind User Guide
-{: .no_toc }
 
 A practical tutorial for installing, configuring, and using the OHMind platform for AI‑driven cation design and HEM (Hydroxide Exchange Membrane) workflows.
-
-## Table of Contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
 
 ---
 
@@ -662,4 +647,297 @@ This pattern is similar for other MCP servers (`OHMind-Chem`, `OHMind-ORCA`, `OH
 - Provide JSON‑like inputs as prompted by the tool schema.
 - Inspect results in the corresponding workspace subdirectory.
 
-These examples should give you a solid foundation to use OHMind both interactively (via the UI) and programmatically (via the backend API or MCP‑compatible clients).
+### 10.7 Quick Recipes: Ready‑To‑Use Prompts
+
+This subsection gives you copy‑paste prompts for common tasks. Use them in the Chainlit UI (Simple Chat or HEM Multi‑Agent profile).
+
+#### 10.7.1 HEM Optimization
+
+- **Multi‑objective piperidinium design**
+  > Design new piperidinium-based cations for backbone PBF_BB_1 optimizing multi-objective HEM performance (conductivity, ESR, and water uptake). Please run PSO using your default settings and summarize the top 10 candidates.
+
+- **Backbone/cation sweep**
+  > For backbones PBF_BB_1 and PP_BB_1, design the best tetraalkylammonium cations using your HEM optimization tools. Compare the top candidates for each backbone in terms of alkaline stability, ESR, and conductivity.
+
+#### 10.7.2 ORCA / QM Analysis
+
+- **LUMO and alkaline stability**
+  > For the cation SMILES "C[N+]1(C)CCCCC1", run a QM calculation using ORCA to estimate its LUMO energy and any other relevant stability descriptors. Then explain qualitatively what they imply for alkaline stability.
+
+- **Comparative QM analysis**
+  > Compare the predicted alkaline stability of these two cations based on QM descriptors: [SMILES1] vs [SMILES2]. Please compute or approximate LUMO energies and any other important descriptors, and provide a short conclusion.
+
+#### 10.7.3 MD (GROMACS) Simulations
+
+- **Small AEM system at 400 K**
+  > Build a simple AEM polymer system with 10 polymer chains and degree of polymerization 25, equilibrated with water at 400 K. Run a reasonably short GROMACS MD simulation and estimate water uptake, swelling ratio, and ionic conductivity. Summarize key simulation parameters and results.
+
+- **Parameter sweep (temperature)**
+  > Using your MD tools, design a small AEM system and run short test simulations at 300 K, 350 K, and 400 K. Compare how water uptake and ionic conductivity change with temperature, and provide a brief discussion.
+
+#### 10.7.4 Multiwfn Electronic Analysis
+
+- **Charge distribution and hot spots**
+  > For the optimized geometry of this cation [SMILES], run a Multiwfn analysis to examine charge distribution and identify likely degradation hot spots under alkaline conditions. Summarize which atoms or fragments are most vulnerable.
+
+- **Orbital visualization request**
+  > Based on the QM results for this cation [SMILES], use Multiwfn to analyze and visualize the LUMO orbital. Describe where the LUMO is localized and what that implies for degradation pathways.
+
+#### 10.7.5 General Chem / RAG Queries
+
+- **Literature-driven design**
+  > Retrieve recent literature on cation designs for hydroxide exchange membranes with high alkaline stability. Summarize typical structural motifs and then propose 5 new candidate cations that follow those design principles.
+
+ - **Mechanism + design loop**
+  > Explain the main degradation mechanisms for quaternary ammonium cations in AEMs under alkaline conditions. Then propose new cation designs that mitigate these mechanisms, and evaluate them using your available tools.
+ 
+ These examples should give you a solid foundation to use OHMind both interactively (via the UI) and programmatically (via the backend API or MCP‑compatible clients).
+
+## 11. MCP Tool Reference & Prompt Recipes
+
+| Domain | MCP server name | Summary |
+| ------ | ---------------- | ------- |
+| Chemistry & RAG | `OHMind-Chem` | Cheminformatics, SMILES/name conversions, functional groups, and chemistry-aware web search. |
+| HEM optimization | `OHMind-HEMDesign` | PSO-based cation design, configuration validation, and optimization job/status/log management. |
+| Quantum chemistry | `OHMind-ORCA` | ORCA-powered QM calculations: single-point energies, optimizations, frequencies, proton affinity, binding, and reactivity descriptors. |
+| Wavefunction analysis | `OHMind-Multiwfn` | Multiwfn-based wavefunction, orbital, electron-density, aromaticity, and spectrum analysis. |
+| MD simulations | `OHMind-GROMACS` | GROMACS workflows for IEM MD: building, parameterization, system setup, simulation, and trajectory/energy analysis. |
+
+ This section summarizes the MCP servers and tools provided by OHMind and gives prompt patterns for using them from MCP-aware assistants (e.g. IDE plugins, Claude Desktop, or the OHMind UI itself).
+
+ Unless otherwise noted, the server names match those in `.chainlit/mcp.json` and typical IDE configurations:
+
+- **Chem server**: `OHMind-Chem`
+- **HEM optimization server**: `OHMind-HEMDesign`
+- **Quantum chemistry / ORCA server**: `OHMind-ORCA`
+- **Wavefunction analysis / Multiwfn server**: `OHMind-Multiwfn`
+- **MD simulation / GROMACS server**: `OHMind-GROMACS`
+
+When connected through an MCP client you usually *don’t* call tools by name yourself; instead you:
+
+- **Describe the task in natural language** and mention the relevant server ("using your OHMind-Chem tools...").
+- Optionally ask the assistant to **list available tools** first, then choose the appropriate one.
+
+The subsections below give a compact tool reference and ready-to-use prompt recipes for each server.
+
+### 11.1 OHMind-Chem – Molecular Informatics & Web RAG
+
+**Server name**: `OHMind-Chem`  
+**Entry point**: `python -m OHMind_agent.MCP.Chem.server --transport stdio`
+
+**Tools (Chem)**
+
+- `MoleculeWeight` – Compute exact molecular weight from a SMILES string.
+- `MoleculeAtomCount` – Count atoms of each element in a molecule.
+- `MoleculeSimilarity` – Tanimoto similarity and qualitative similarity description between two SMILES.
+- `FunctionalGroups` – Detect common functional groups (e.g. alcohol, amide, sulfonate) from SMILES.
+- `SmilesCanonicalization` – Canonicalize a SMILES string (with options for isomeric info and atom maps).
+- `MoleculeSmilesCheck` – Validate a molecular SMILES string and explain syntax issues.
+- `ReactionSmilesCheck` – Validate reaction SMILES (`reactants>reagents>products`).
+- `Iupac2Smiles` – Convert IUPAC name → SMILES (via PubChem, with robust error handling).
+- `Smiles2Iupac` – Convert SMILES → IUPAC name.
+- `Smiles2Formula` – Molecular formula from SMILES.
+- `Name2Smiles` – Common/brand/chemical name → SMILES.
+- `Selfies2Smiles` – SELFIES → SMILES.
+- `Smiles2Selfies` – SMILES → SELFIES.
+- `Smiles2Cas` – Look up approximate CAS number from SMILES (via PubChem metadata).
+- `Smiles2Image` – Render a 2D structure image from SMILES with configurable width/height.
+- `WebSearch` – Chemistry-aware web/RAG search (Tavily-backed) for literature, properties, etc.
+- `MoleculeCaptioner` – Natural-language caption / description of a molecule from SMILES (MolT5 model).
+
+**Prompt recipes (Chem)**
+
+- **Property and functional group analysis**  
+  > Using your OHMind-Chem MCP tools, analyze this molecule with SMILES `CC(=O)OC1=CC=CC=C1C(=O)O`.  
+  > 1) Check that the SMILES is valid.  
+  > 2) Report its molecular weight and formula.  
+  > 3) List the functional groups and briefly explain what each group typically does chemically.
+
+- **Name ↔ SMILES ↔ image workflow**  
+  > With your OHMind-Chem tools, convert the IUPAC name "2-propanol" to SMILES, verify the SMILES is valid, and then generate a small 300×300 structure image.  
+  > Return the SMILES, a short caption describing the molecule, and a link or reference to the generated image file.
+
+- **Similarity and RAG-assisted design**  
+  > Use your Chem MCP tools to compare lidocaine and procaine by SMILES.  
+  > 1) Compute their structural similarity.  
+  > 2) Use your web-search tool to summarize key differences in their pharmacological profiles.  
+  > 3) Propose a new candidate local anesthetic scaffold and justify it.
+
+### 11.2 OHMind-HEMDesign – HEM Optimization & Job Management
+
+**Server name**: `OHMind-HEMDesign`  
+**Entry point**: `python -m OHMind_agent.MCP.HEMDesign.server --transport stdio`
+
+**Tools (HEMDesign)**
+
+- `ListBackbones` – List available polymer backbones for HEM design with SMILES and identifiers.
+- `ListCations` – List available cation families and initial SMILES templates.
+- `ValidateConfig` – Validate a prospective optimization configuration (backbone, cation family, property mode).
+- `HEMOptimizer` – Launch PSO-based optimization to design new cation structures for a given backbone/cation/property objective.
+- `CheckStatus` – Inspect saved optimization results and return top solutions from CSV logs.
+- `ShowLogs` – Stream recent optimization log lines (for monitoring long runs).
+- `KillJob` – List running optimization jobs or terminate one by backbone/cation/job ID.
+
+**Prompt recipes (HEMDesign)**
+
+- **Discover design space**  
+  > Using your OHMind-HEMDesign tools, list all available backbones and cation types, then recommend 2–3 promising backbone–cation combinations for alkaline-stable AEMs.  
+  > Summarize why these combinations are interesting.
+
+- **Validate and start an optimization**  
+  > First validate a multi-objective optimization for backbone `PBF_BB_1` with `piperidinium` cations and property mode `multi`.  
+  > If the configuration is valid, start a PSO optimization with moderate settings (e.g. ~250 particles, ~5–10 steps), saving results to a fresh directory.  
+  > Explain what metrics you are optimizing and how you will interpret the final Pareto front.
+
+- **Monitor / manage a running job**  
+  > Using your HEMDesign job-management tools, find any currently running optimizations.  
+  > Show me a short snippet of the latest log lines for each job, and if any look clearly stalled or failing, ask me whether to kill them and, if I agree, terminate them safely before summarizing completed jobs.
+
+### 11.3 OHMind-ORCA – Quantum Chemistry
+
+**Server name**: `OHMind-ORCA`  
+**Entry point**: `python -m OHMind_agent.MCP.ORCA.server --transport stdio`
+
+**Core tools (ORCA)**
+
+- `SinglePointEnergy` – Single-point energy of a structure (XYZ) with configurable method/basis/dispersion.
+- `GeometryOptimization` – Optimize geometry from XYZ; returns optimized coordinates, final energy, and result directory.
+- `FrequencyCalculation` – Vibrational frequencies, IR spectrum, thermochemistry, and Gibbs free energy.
+- `SmilesToXYZ` – SMILES → 3D XYZ coordinates using RDKit.
+
+**IEM-focused tools (ORCA)**
+
+- `ProtonAffinityCalculation` – Proton affinity and approximate pKa for acidic groups (gas and solution phase).
+- `BindingEnergyCalculation` – Ion–functional group binding energies with BSSE correction and optional solvation.
+- `IonicSolvationEnergy` – Solvation/hydration energies and free energies for ions or ion–water clusters.
+- `ChargeAnalysis` – Mulliken, Löwdin, Hirshfeld charges; dipole/quadrupole moments.
+- `TransitionStateSearch` – Transition-state search with optional frequency verification and activation energy.
+- `NMRChemicalShift` – NMR shielding and chemical shifts for selected nuclei (¹H, ¹³C, ¹⁹F, ³¹P, etc.).
+- `PolymerReactivity` – HOMO/LUMO energies, gaps, and conceptual DFT descriptors for monomer reactivity.
+
+**Prompt recipes (ORCA)**
+
+- **End‑to‑end QM descriptor pipeline**  
+  > Using your OHMind-ORCA QM tools, start from the SMILES `C[N+]1(C)CCCCC1` and:  
+  > 1) Convert to a reasonable 3D geometry.  
+  > 2) Optimize the structure at B3LYP/def2-SVP with D3BJ.  
+  > 3) Compute frequencies to confirm there are no imaginary modes.  
+  > 4) Report LUMO energy and any descriptors relevant to alkaline stability, and interpret them qualitatively.
+
+- **Proton affinity and pKa estimation**  
+  > For a sulfonic-acid-containing fragment (you can build or assume a reasonable model), use your proton affinity tool to estimate gas-phase and solution-phase proton affinity and the corresponding pKa.  
+  > Explain what these values imply for acid strength and membrane behavior.
+
+- **Binding & solvation comparison**  
+  > Compare the binding energy and hydration energy of OH⁻ vs Cl⁻ to a model quaternary ammonium site using your ORCA binding and solvation tools.  
+  > Summarize which ion binds more strongly and how solvation competes with binding.
+
+### 11.4 OHMind-Multiwfn – Wavefunction & Orbital Analysis
+
+**Server name**: `OHMind-Multiwfn`  
+**Entry point**: `python -m OHMind_agent.MCP.Multiwfn.server --transport stdio`
+
+**Tools (Multiwfn)**
+
+- `AnalyzeWavefunction` – General wavefunction diagnostics for a given input file (e.g. fchk/wfn).
+- `WeakInteractionAnalysis` – RDG/NCI/IGMH/IRI analyses of noncovalent interactions.
+- `AromaticityAnalysis` – Aromaticity indices including NICS and related measures.
+- `ElectronDensityAnalysis` – AIM, ELF, LOL, Laplacian and related electron-density analyses.
+- `OrbitalAnalysis` – Orbital compositions, energies, and populations.
+- `PopulationAnalysis` – Mulliken, Hirshfeld, ADCH, RESP, CM5, MBIS and other charge schemes.
+- `BondAnalysis` – Bond orders and bond strength descriptors (e.g. Mayer/Wiberg).
+- `EnergyDecomposition` – LMO-EDA, SAPT and related energy-decomposition analyses.
+- `SimulateSpectrum` – Simulated spectra (UV–Vis, IR, Raman, NMR, ECD, VCD).
+- `MDAnalysis` – Post-processing of MD trajectories (RDFs, coordination numbers, H-bonds, etc.).
+- `GenerateCubeFiles` – Generate cube files for densities, orbitals, and related scalar fields.
+- `AdNDPAnalysis` – Adaptive Natural Density Partitioning analysis.
+- `VisualizeOrbitals` – High-level orbital visualization and rendering orchestration.
+- `QuickVisualizeHOMOLUMO` – Convenience tool to quickly visualize only HOMO/LUMO.
+- `RenderOrbitals2D` – 2D slice plotting of orbitals/densities (matplotlib).
+- `RenderOrbitals3D` – 3D orbital rendering with VMD/Tachyon style output.
+
+**Prompt recipes (Multiwfn)**
+
+- **Charge & reactive hot-spot analysis**  
+  > For the optimized cation geometry from my QM calculation (assume I have already generated a suitable wavefunction file), use your Multiwfn tools to analyze charge distribution and identify likely degradation hot spots under alkaline conditions.  
+  > Report which atoms or fragments are most positively charged or otherwise reactive.
+
+- **Orbital visualization**  
+  > Starting from the wavefunction of a candidate cation, generate HOMO and LUMO visualizations (both 2D slices and 3D renders).  
+  > Describe where the LUMO is localized and what that suggests about degradation pathways.
+
+- **Spectrum simulation from MD snapshot**  
+  > Take a representative structure from an MD snapshot of my membrane system and use Multiwfn to simulate an approximate UV–Vis or IR spectrum, highlighting features that correlate with specific structural motifs.
+
+### 11.5 OHMind-GROMACS – MD Workflows for IEMs
+
+**Server name**: `OHMind-GROMACS`  
+**Entry point**: `python -m OHMind_agent.MCP.GROMACS.server --transport stdio`
+
+**High-level workflow tools (GROMACS)**
+
+- `run_complete_iem_workflow_tool` – From monomer SMILES to a full IEM MD workflow (build polymer, parameterize, prepare system, run MD, analyze key outputs).
+- `run_complete_md_simulation_tool` – Given structure/topology and basic settings, run a full EM → NVT → NPT → MD pipeline.
+
+**Building & parameterization tools**
+
+- `calculate_ions_per_monomer_tool` – Estimate ionizable sites per monomer from SMILES.
+- `analyze_ion_exchange_groups_tool` – Advanced analysis of ion-exchange groups in monomers.
+- `create_polymer_from_smiles_tool` – Build oligomer/polymer PDBs from monomer SMILES (RDKit-based).
+- `create_itp_file_tool` – End-to-end workflow from polymer PDB to a true GROMACS `.itp` file (Antechamber + tleap + conversion + extraction).
+- `parameterize_molecule_antechamber_tool` – Run Antechamber on a molecule to get charges/atom types.
+- `prepare_mainchain_files_tool` – Produce HEAD/CHAIN/TAIL mainchain definitions from Antechamber output.
+- `run_prepgen_tool` – Generate PREPI residue files from mainchain definitions.
+- `build_polymer_with_tleap_tool` – Build polymer chains with tleap for topology generation.
+- `convert_amber_to_gromacs_tool` – Convert AMBER topologies to GROMACS formats.
+- `extract_ff_and_itp_tool` – Extract `forcefield.itp` and monomer `.itp` from a `.top` file.
+
+**System preparation & simulation tools**
+
+- `calculate_single_ion_system_tool` – Compute system composition and charge balance for a single-ion system.
+- `create_system_topology_tool` – Build system `.top` with specified polymers, ions, water content, and water model.
+- `create_packmol_input_tool` – Run PACKMOL-based initial packing of polymers and ions.
+- `prepare_simulation_box_tool` – Use `gmx editconf` to define simulation box.
+- `create_mdp_file_tool` – Generate MDP files (EM, NVT, NPT, MD) with chosen T, P, and timestep.
+- `run_grompp_tool` – Prepare `tpr` files via `gmx grompp`.
+- `run_mdrun_tool` – Execute MD runs with `gmx mdrun` and basic progress reporting.
+
+**Analysis & configuration tools**
+
+- `calculate_msd_tool` – Compute MSD and diffusion-related metrics from trajectories.
+- `analyze_energy_tool` – Analyze energies and thermodynamic observables from `.edr` files.
+- `get_water_model_info_tool` – Detailed info for a given water model (e.g. SPC/E, TIP3P) and usage notes.
+- `list_available_water_models_tool` – Enumerate all configured water models, highlighting recommended ones.
+- `get_current_config_tool` – Report current configuration, work directory, and default settings for the GROMACS server.
+- `update_work_directory_tool` – Change the default work directory for the current MCP session.
+
+**Prompt recipes (GROMACS)**
+
+- **Small AEM system from SMILES**  
+  > Using your OHMind-GROMACS tools, start from this monomer SMILES: `[SMILES]`.  
+  > 1) Estimate ions per monomer and suggest an appropriate ion type and water model.  
+  > 2) Build an oligomer, parameterize it, generate a real `.itp` file, and create a small system (e.g. 10 chains, DP 25, reasonable water uptake).  
+  > 3) Run a short MD simulation at 400 K and summarize key properties such as density and qualitatively estimated conductivity.
+
+- **Focused MD pipeline control**  
+  > I already have `system_initial.pdb` and `system.top`.  
+  > Use your GROMACS MCP tools to: (a) build a simulation box, (b) generate NVT and NPT MDP files with 400 K and 1 bar, (c) run grompp and mdrun for a short production run, and (d) analyze MSD and key energy terms.  
+  > Return a human-readable summary of the MD setup and results.
+
+- **Water model and work-directory management**  
+  > With your configuration tools, list available water models and recommend one for hydroxide-conducting AEMs.  
+  > Then update the MD work directory to a new folder under my project (e.g. `./simulations/aem_test`) and confirm the change.
+
+### 11.6 Putting MCP Servers Together
+
+The real power of OHMind comes from **composing multiple MCP servers**:
+
+- **Chem → ORCA → Multiwfn** for structure generation, QM calculations, and detailed electronic analysis.
+- **Chem → HEMDesign** for structure-space exploration guided by cheminformatics and literature search.
+- **Chem/ORCA → GROMACS → Multiwfn** for MD-informed QM analysis (e.g. taking representative MD snapshots into QM/Multiwfn).
+
+When prompting an MCP-aware assistant, it is usually enough to:
+
+- Clearly state the *physical/chemical question* you want answered.
+- Indicate which parts should use **HEM optimization**, **QM**, **MD**, or **wavefunction analysis**.
+- Ask the assistant to **explain which tools it used** (server + tool names) so that you can reproduce or further automate the workflow later.
