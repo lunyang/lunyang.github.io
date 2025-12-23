@@ -1,63 +1,139 @@
----
-layout: default
-title: OHMind User Guide
-nav_order: 2
----
-
 # OHMind User Guide
-{: .no_toc }
 
 A practical tutorial for installing, configuring, and using the OHMind platform for AI‑driven cation design and HEM (Hydroxide Exchange Membrane) workflows.
-{: .fs-6 .fw-300 }
-
-## Table of contents
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
 
 ---
 
 ## 1. Overview
 
-**OHMind** is an AI‑driven toolkit for cation design and HEM research. It includes:
+**OHMind** is a Language-Model Multi-Agent Framework for Accelerating Hydroxide Exchange Membrane (HEM) Discovery, developed by the PolyAI team from the Changchun Institute of Applied Chemistry, Chinese Academy of Sciences.
 
-- **Core library**: `OHMind/` (VAE, PSO, QM, MD, reaction models, etc.)
-- **Multi‑agent backend**: `OHMind_agent/` (FastAPI + LangGraph multi‑agent system)
-- **Web UI**: `OHMind_ui/` (Chainlit + LangGraph frontend)
-- **MCP servers**: Chemistry, ORCA, Multiwfn, GROMACS, HEMDesign
+### System Components
+
+OHMind consists of four main components:
+
+- **Core library** (`OHMind/`): VAE models, PSO optimization, QM/MD integration, reaction models, and HEM property prediction
+- **Multi‑agent system** (`OHMind_agent/`): LangGraph-based multi-agent orchestration with 8 specialized agents
+- **CLI application** (`OHMind_cli/`): Textual-based TUI for interactive agent communication
+- **Web UI** (`OHMind_ui/`): Chainlit + LangGraph frontend for browser-based access
+- **MCP servers**: Five domain-specific servers (Chemistry, ORCA, Multiwfn, GROMACS, HEMDesign)
+
+### Architecture Highlights
+
+- **LangGraph Workflow**: Supervisor pattern with conditional routing and task planning
+- **MCP Integration**: Model Context Protocol for tool access via `langchain-mcp-adapters`
+- **Persistent Sessions**: Long-lived MCP connections for efficient tool execution
+- **Task Planning**: Automatic decomposition of complex queries into multi-step execution plans
+- **RAG System**: Qdrant-based vector search for HEM literature retrieval
+- **Streaming Interface**: Real-time token streaming with agent activity visualization
 
 This guide walks you through:
 
 1. Installation and environment setup
-2. Workspace layout and unified result storage
-3. Configuring environment variables and MCP servers
-4. Starting the backend and UI
-5. Running typical workflows (especially HEM multi‑agent)
-6. Debugging MCP servers and troubleshooting
+2. System architecture and component interaction
+3. Workspace layout and unified result storage
+4. Configuring environment variables and MCP servers
+5. Starting the backend, CLI, and UI
+6. Running typical workflows (especially HEM multi‑agent)
+7. Understanding the agent system and task planning
+8. Debugging MCP servers and troubleshooting
 
 ---
 
-## 2. Installation & Environment
+## 2. System Architecture Overview
 
-### 2.1 Prerequisites
+### 2.1 OHMind_agent - Multi-Agent System
+
+The `OHMind_agent` directory implements a LangGraph-based multi-agent architecture with:
+
+#### Agent Graph Structure
+- **StateGraph**: Manages conversation flow and agent state
+- **Supervisor Agent**: Central coordinator with complexity detection and task planning
+- **8 Specialized Agents**:
+  - `hem_agent`: HEM design & PSO optimization
+  - `chemistry_agent`: Molecular operations & SMILES handling
+  - `qm_agent`: Quantum chemistry via ORCA
+  - `md_agent`: Molecular dynamics via GROMACS
+  - `multiwfn_agent`: Wavefunction analysis
+  - `rag_agent`: Scientific literature search
+  - `web_search_agent`: Real-time web information
+  - `summary_agent`: Summarizes results from the agent system
+
+#### Key Features
+- **Task Planning**: Auto-detects complex queries and creates multi-step execution plans
+- **Conditional Routing**: `route_after_agent()` handles transitions between agents
+- **Streaming Support**: Real-time token streaming with callback handlers
+- **State Management**: Shared `AgentState` dictionary tracks messages, MCP results, and task progress
+
+#### MCP Session Management
+- **Persistent Connections**: Uses `MultiServerMCPClient` from `langchain-mcp-adapters`
+- **Transport Support**: Both `stdio` and `streamable_http` transports
+- **Tool Distribution**: Session manager loads and distributes tools to agents by server
+- **Long-lived Sessions**: Context managers kept active to maintain tool references
+
+### 2.2 OHMind_cli - Terminal User Interface
+
+The `OHMind_cli` directory provides a Textual-based TUI with:
+
+#### Main Features
+- **Resizable Sidebar**: Workspace file browser with drag-to-resize
+- **File Preview**: Text (with syntax highlighting) and image preview modals
+- **Agent Visualization**: Galaxy-themed colors and icons for each agent
+- **Export**: Markdown, HTML, and SVG screenshot export
+
+#### Custom Widgets
+- `TextPreview`: Syntax highlighting for Python, JSON, YAML, etc.
+- `SidebarSplitter`: Draggable divider for resizing sidebar
+- `WorkspaceSidebar`: Filtered directory tree for workspace files
+- `StreamingMessage`: Real-time token display with cursor indicator
+- `ToolCallWidget`: Visual indicators for tool execution
+
+#### Callback System
+- `TextualCallbackHandler`: Captures LLM tokens and tool events
+- Integrates with LangChain/LangGraph callbacks
+- Updates UI in real-time during agent execution
+
+### 2.3 MCP Server Architecture
+
+Five domain-specific MCP servers provide tools to agents:
+
+| Server | Location | Tool Count | Purpose |
+|--------|----------|------------|---------|
+| Chem | `MCP/Chem/` | 18 | SMILES operations, functional groups, molecular properties |
+| HEMDesign | `MCP/HEMDesign/` | 7 | PSO optimization, backbone/cation management, job control |
+| ORCA | `MCP/ORCA/` | 10+ | QM calculations, geometry optimization, properties |
+| Multiwfn | `MCP/Multiwfn/` | 14 | Wavefunction analysis, orbital visualization, electron density |
+| GROMACS | `MCP/GROMACS/` | 30+ | MD simulations, system preparation, trajectory analysis |
+
+Each server implements:
+- Tool discovery via MCP protocol
+- Input validation and error handling
+- Result storage in unified workspace
+- Progress monitoring for long-running jobs
+
+---
+
+## 3. Installation & Environment
+
+### 3.1 Prerequisites
 
 - Linux (tested on Ubuntu‑like systems)
 - Conda (Anaconda or Miniconda)
-- GPU with CUDA (recommended)
+- GPU with CUDA (recommended for VAE models)
+- Python 3.10+ (specified in environment.yml)
 - Optional but recommended external tools:
-  - [ORCA](https://orcaforum.kofo.mpg.de/app.php/portal) – quantum chemistry
+  - [ORCA](https://orcaforum.kofo.mpg.de/app.php/portal) – quantum chemistry calculations
   - [Multiwfn](http://sobereva.com/multiwfn/) – wavefunction analysis
-  - GROMACS – molecular dynamics
-  - Qdrant – vector database
+  - GROMACS – molecular dynamics simulations
+  - Qdrant – vector database for RAG
   - PostgreSQL + MinIO – used by the Chainlit UI
 
-### 2.2 Create the Conda Environment
+### 3.2 Create the Conda Environment
 
 From the project root:
 
 ```bash
-cd /media/polyai/8T/MyResearch/CationDesign/OHMind
+cd ./OHMind
 
 # Create the OHMind environment (uses environment.yml)
 conda env create -f environment.yml
@@ -66,9 +142,15 @@ conda env create -f environment.yml
 conda activate OHMind
 ```
 
-> The `environment.yml` file pins most Python dependencies (PyTorch, DGL, RDKit, FastAPI, Chainlit, etc.).
+> The `environment.yml` file includes all Python dependencies:
+> - LangChain + LangGraph for agent orchestration
+> - PyTorch, DGL for VAE models
+> - RDKit for cheminformatics
+> - FastAPI, Chainlit for web interfaces
+> - Textual for TUI
+> - langchain-mcp-adapters for MCP integration
 
-### 2.3 External Software Paths
+### 3.3 External Software Paths
 
 You will need to know where the following are installed on your system:
 
@@ -81,11 +163,11 @@ These are configured via environment variables (see **Section 4**).
 
 ---
 
-## 3. Unified Workspace Layout
+## 4. Unified Workspace Layout
 
 All heavy computation (QM, MD, PSO/HEM, Multiwfn) is organized under a **single workspace root**.
 
-### 3.1 Workspace Root
+### 4.1 Workspace Root
 
 The unified root is controlled by the environment variable:
 
@@ -94,7 +176,7 @@ The unified root is controlled by the environment variable:
 In this project it is typically set to:
 
 ```bash
-OHMind_workspace=/media/polyai/8T/MyResearch/CationDesign/OHMind_workspace
+OHMind_workspace=/OHMind_workspace
 ```
 
 This is defined in:
@@ -103,7 +185,7 @@ This is defined in:
 - `OHMind_agent/.env`
 - `start_apps.sh` (fallback default `${ROOT_DIR}_workspace`)
 
-### 3.2 Subdirectory Layout
+### 4.2 Subdirectory Layout
 
 Under `OHMind_workspace`, subdirectories are used for each domain:
 
@@ -118,8 +200,8 @@ OHMind_workspace/
 The corresponding environment variables are:
 
 - `HEM_SAVE_PATH = ${OHMind_workspace}/HEM`
-- `QM_WORK_DIR   = ${OHMind_workspace}/QM`
-- `MD_WORK_DIR   = ${OHMind_workspace}/MD`
+- `QM_WORK_DIR   = ${OHMind_workspace}/ORCA`
+- `MD_WORK_DIR   = ${OHMind_workspace}/GROMACS`
 - `MULTIWFN_WORK_DIR = ${OHMind_workspace}/Multiwfn`
 - `WORKSPACE_ROOT = ${OHMind_workspace}` (generic root for backend code)
 
@@ -128,7 +210,7 @@ These are exported by:
 - `.env` and `OHMind_agent/.env`
 - `start_apps.sh`, which sets sensible defaults if variables are not pre‑set.
 
-### 3.3 How `start_apps.sh` Sets Workspace Paths
+### 4.3 How `start_apps.sh` Sets Workspace Paths
 
 From the project root:
 
@@ -141,8 +223,8 @@ Internally, the script does (simplified):
 ```bash
 export OHMind_workspace="${OHMind_workspace:-${ROOT_DIR}_workspace}"
 export HEM_SAVE_PATH="${HEM_SAVE_PATH:-${OHMind_workspace}/HEM}"
-export QM_WORK_DIR="${QM_WORK_DIR:-${OHMind_workspace}/QM}"
-export MD_WORK_DIR="${MD_WORK_DIR:-${OHMind_workspace}/MD}"
+export QM_WORK_DIR="${QM_WORK_DIR:-${OHMind_workspace}/ORCA}"
+export MD_WORK_DIR="${MD_WORK_DIR:-${OHMind_workspace}/GROMACS}"
 export MULTIWFN_WORK_DIR="${MULTIWFN_WORK_DIR:-${OHMind_workspace}/Multiwfn}"
 ```
 
@@ -150,9 +232,9 @@ So if you **do nothing**, it will create/use `${ROOT_DIR}_workspace` with the de
 
 ---
 
-## 4. Environment Variables & Configuration
+## 5. Environment Variables & Configuration
 
-### 4.1 Core `.env` (project root)
+### 5.1 Core `.env` (project root)
 
 The root `.env` controls the multi‑agent FastAPI backend (`app.py`).
 Key entries:
@@ -160,22 +242,22 @@ Key entries:
 - LLM configuration (OpenAI‑compatible via `OPENAI_COMPATIBLE_*`)
 - Qdrant URL: `QDRANT_URL`, `QDRANT_API_KEY`
 - Web search: `TAVILY_API_KEY`
-- MCP config: `MCP_CONFIG_PATH=/media/polyai/8T/MyResearch/CationDesign/OHMind/mcp.json`
+- MCP config: `MCP_CONFIG_PATH=/OHMind/mcp.json`
 - Workspace:
-  - `OHMind_workspace=/media/polyai/8T/MyResearch/CationDesign/OHMind_workspace`
+  - `OHMind_workspace=/OHMind_workspace`
   - `HEM_SAVE_PATH=${OHMind_workspace}/HEM`
   - `WORKSPACE_ROOT=${OHMind_workspace}`
 
-The backend reads these via `OHMind_agent.config.Settings`.
+The backend reads these via `OHMind_agent.config.Settings` (Pydantic-based configuration management).
 
-### 4.2 `OHMind_agent/.env`
+### 5.2 `OHMind_agent/.env`
 
 This file is used when running the multi‑agent backend or MCP servers directly from `OHMind_agent`. It includes:
 
 - `MCP_CONFIG_PATH` – usually the same root `mcp.json`
 - `OHMind_workspace`, `HEM_SAVE_PATH`, `WORKSPACE_ROOT` – as above
 
-### 4.3 UI `.env` (`OHMind_ui/.env`)
+### 5.3 UI `.env` (`OHMind_ui/.env`)
 
 This configures the Chainlit + LangGraph UI:
 
@@ -187,17 +269,37 @@ This configures the Chainlit + LangGraph UI:
 
 The UI obtains MCP server details from `OHMind_ui/.chainlit/mcp.json` (documentation only; Chainlit currently requires manual entry via the UI).
 
-### 4.4 MCP Configuration Files
+### 5.4 CLI Launch (`start_OHMind_cli.sh`)
+
+To start the terminal user interface (TUI):
+
+```bash
+cd /OHMind
+./start_OHMind_cli.sh
+```
+
+This script:
+- Activates the `OHMind` conda environment
+- Sets `PYTHONPATH` to the project root
+- Exports workspace environment variables
+- Launches `OHMind_cli` TUI application
+
+The CLI connects to the same MCP servers as the web UI but provides a terminal-based interface with:
+- Real-time streaming display
+- Workspace file browser with preview
+- Export to Markdown/HTML/SVG
+
+### 5.5 MCP Configuration Files
 
 There are two important JSON files describing MCP servers:
 
 1. **Backend MCP config**: `mcp.json` (in project root)
    - Used by the multi‑agent backend via `OHMind_agent.config.mcp_config_path`
    - Paths in `env` now use the unified workspace layout:
-     - `QM_WORK_DIR = /media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/QM`
-     - `MD_WORK_DIR = /media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/MD`
-     - `MULTIWFN_WORK_DIR = /media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/Multiwfn`
-     - `HEM_SAVE_PATH = /media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/HEM`
+     - `QM_WORK_DIR = OHMind_workspace/ORCA`
+     - `MD_WORK_DIR = OHMind_workspace/GROMACS`
+     - `MULTIWFN_WORK_DIR = OHMind_workspace/Multiwfn`
+     - `HEM_SAVE_PATH = OHMind_workspace/HEM`
 
 2. **UI MCP config**: `OHMind_ui/.chainlit/mcp.json`
    - Documents how to add MCP servers in Chainlit’s UI.
@@ -207,14 +309,14 @@ There are two important JSON files describing MCP servers:
 
 ---
 
-## 5. Starting the Backend & UI
+## 6. Starting the Backend, CLI & UI
 
-### 5.1 Using `start_apps.sh` (recommended)
+### 6.1 Using `start_apps.sh` (Web UI, recommended)
 
 From the project root:
 
 ```bash
-cd /media/polyai/8T/MyResearch/CationDesign/OHMind
+cd OHMind
 
 # Optional overrides
 BACKEND_PORT=8005 \   # FastAPI backend port
@@ -232,7 +334,26 @@ This script:
 - Sets `OHMIND_BACKEND_URL` for the UI
 - Starts the Chainlit UI on `http://localhost:8000`
 
-### 5.2 Accessing the UI
+### 6.2 Using `start_OHMind_cli.sh` (TUI, alternative)
+
+For a terminal-based interface:
+
+```bash
+cd OHMind
+./start_OHMind_cli.sh
+```
+
+The CLI provides:
+- **Interactive chat** with streaming responses
+- **Workspace sidebar** showing generated files in real-time
+- **File preview** for text (with syntax highlighting) and images
+- **Task plan visualization** with step-by-step progress
+- **Export functionality** (Markdown, HTML, SVG screenshot)
+- **Keyboard shortcuts**: `Ctrl+B` (toggle sidebar), `Ctrl+L` (clear chat), `Ctrl+E` (export)
+
+The TUI connects directly to MCP servers without requiring the FastAPI backend.
+
+### 6.3 Accessing the Web UI
 
 After `start_apps.sh` is running, open:
 
@@ -249,13 +370,15 @@ Once logged in, you’ll see multiple workflows, including **HEM Multi‑Agent**
 
 ---
 
-## 6. MCP Servers Configuration (UI Side)
+## 7. MCP Servers Configuration (UI Side)
 
-### 6.1 Adding MCP Servers in Chainlit
+### 7.1 Adding MCP Servers in Chainlit
 
 Chainlit (v2.9.0) does **not** automatically read `OHMind_ui/.chainlit/mcp.json`. Instead, that file documents the servers you should add via the UI.
 
-1. Start backend + UI (see Section 5).
+**Note**: The CLI (`OHMind_cli`) automatically connects to MCP servers via the session manager and does not require manual configuration.
+
+1. Start backend + UI (see Section 6).
 2. In the UI, open the **MCP** panel (left sidebar) and click **Add server**.
 3. For each server (`OHMind-Chem`, `OHMind-HEMDesign`, `OHMind-ORCA`, `OHMind-Multiwfn`, `OHMind-GROMACS`):
    - **Name**: e.g. `OHMind-ORCA`
@@ -265,42 +388,85 @@ Chainlit (v2.9.0) does **not** automatically read `OHMind_ui/.chainlit/mcp.json`
 
 Most environment variables (including workspace paths) are already exported by `.env` + `start_apps.sh`, so in many cases you can leave the **Env** section empty.
 
-### 6.2 Manual MCP Server Commands (Debugging)
+### 7.2 Manual MCP Server Commands (Debugging)
 
 You can run MCP servers manually to debug issues. Examples:
 
 ```bash
 # Chem
-PYTHONPATH=/media/polyai/8T/MyResearch/CationDesign/OHMind \
+PYTHONPATH=OHMind \
   TAVILY_API_KEY=tvly-dev-... \
   RDKIT_QUIET=1 \
   /home/you/anaconda3/envs/OHMind/bin/python -m OHMind_agent.MCP.Chem.server --transport stdio
 
 # ORCA
-PYTHONPATH="/media/polyai/8T/MyResearch/CationDesign/OHMind" \
+PYTHONPATH="OHMind" \
   OHMind_ORCA="/home/you/ORCA/orca" \
   OHMind_MPI="/usr/local/bin" \
-  QM_WORK_DIR="/media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/QM" \
+  QM_WORK_DIR="OHMind_workspace/QM" \
   /home/you/anaconda3/envs/OHMind/bin/python -m OHMind_agent.MCP.ORCA.server
 
 # HEMDesign
-PYTHONPATH=/media/polyai/8T/MyResearch/CationDesign/OHMind \
-  HEM_SAVE_PATH=/media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/HEM \
+PYTHONPATH=OHMind \
+  HEM_SAVE_PATH=OHMind_workspace/HEM \
   /home/you/anaconda3/envs/OHMind/bin/python -m OHMind_agent.MCP.HEMDesign.server --transport stdio
 
 # Multiwfn
-PYTHONPATH=/media/polyai/8T/MyResearch/CationDesign/OHMind \
+PYTHONPATH=OHMind \
   MULTIWFN_PATH=/home/you/Multiwfn/Multiwfn \
-  MULTIWFN_WORK_DIR=/media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/Multiwfn \
+  MULTIWFN_WORK_DIR=OHMind_workspace/Multiwfn \
   /home/you/anaconda3/envs/OHMind/bin/python -m OHMind_agent.MCP.Multiwfn.server --transport stdio
 
 # GROMACS
-PYTHONPATH=/media/polyai/8T/MyResearch/CationDesign/OHMind \
-  MD_WORK_DIR=/media/polyai/8T/MyResearch/CationDesign/OHMind_workspace/MD \
+PYTHONPATH=OHMind \
+  MD_WORK_DIR=OHMind_workspace/MD \
   /home/you/anaconda3/envs/OHMind/bin/python -m OHMind_agent.MCP.GROMACS.server --transport stdio
 ```
 
 Adapt the paths (`OHMind_ORCA`, `MULTIWFN_PATH`, Conda path) to your system.
+
+### 6.3 HTTP (streamable) MCP servers for IDEs and external clients
+
+When you use the root helper script:
+
+```bash
+cd OHMind
+./start_OHMind.sh
+```
+
+the project also starts **HTTP (streamable-http)** FastMCP servers suitable for
+MCP-aware IDE plugins and tools that speak the MCP streamable HTTP protocol.
+
+The default endpoints are:
+
+- `OHMind-Chem`      → `http://127.0.0.1:8101/`
+- `OHMind-HEMDesign` → `http://127.0.0.1:8102/`
+- `OHMind-ORCA`      → `http://127.0.0.1:8103/`
+- `OHMind-Multiwfn`  → `http://127.0.0.1:8104/`
+- `OHMind-GROMACS`   → `http://127.0.0.1:8105/`
+
+Each server uses FastMCP's **streamable HTTP transport** with
+`streamable_http_path="/"`, so the MCP endpoint lives at the **root path**. In
+other words, external MCP clients should connect directly to the base URL
+without appending `/mcp`.
+
+A typical HTTP-style MCP client config entry (pseudocode) looks like:
+
+```jsonc
+"OHMind-Chem-HTTP": {
+  "type": "http",
+  "url": "http://127.0.0.1:8101/",
+  "disabled": false
+}
+```
+
+with analogous entries for `OHMind-HEMDesign-HTTP`, `OHMind-ORCA-HTTP`,
+`OHMind-Multiwfn-HTTP`, and `OHMind-GROMACS-HTTP` using the ports above.
+
+The **stdio** and **HTTP** transports are independent and can be used in
+parallel: Chainlit typically uses stdio-based servers (Sections 6.1–6.2), while
+IDE plugins or external MCP clients can connect to the HTTP endpoints exposed
+by `start_OHMind.sh`.
 
 ---
 
@@ -366,8 +532,8 @@ MCP servers provide tools to these agents, and all heavy computations are stored
 - Ensure the workspace root exists and is writable:
 
   ```bash
-  mkdir -p /media/polyai/8T/MyResearch/CationDesign/OHMind_workspace
-  chmod u+rwx /media/polyai/8T/MyResearch/CationDesign/OHMind_workspace
+  mkdir -p OHMind_workspace
+  chmod u+rwx OHMind_workspace
   ```
 
 - Likewise ensure subdirectories exist (they are often auto‑created, but you can create them manually):
@@ -396,7 +562,7 @@ MCP servers provide tools to these agents, and all heavy computations are stored
 - Inspect the backend log:
 
   ```bash
-  cd /media/polyai/8T/MyResearch/CationDesign/OHMind
+  cd OHMind
   tail -n 200 backend.log
   ```
 
@@ -475,7 +641,7 @@ This is the most user‑friendly way to run PSO‑based HEM optimization.
 1. **Start backend + UI**
    - From the project root:
      ```bash
-     cd /media/polyai/8T/MyResearch/CationDesign/OHMind
+     cd OHMind
      ./start_apps.sh
      ```
    - Wait until both backend and UI are running.
@@ -524,7 +690,7 @@ You can call the LangGraph backend directly (useful for scripting or integration
 1. **Ensure backend is running**
    - Either via `./start_apps.sh` or manually:
      ```bash
-     cd /media/polyai/8T/MyResearch/CationDesign/OHMind
+     cd OHMind
      uvicorn app:app --host 0.0.0.0 --port 8005
      ```
 
