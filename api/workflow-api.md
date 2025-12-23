@@ -1,3 +1,10 @@
+---
+title: Workflow API Reference
+description: "LangGraph workflow API documentation for the OHMind multi-agent system"
+parent: API Reference
+nav_order: 2
+---
+
 # Workflow API Reference
 
 > LangGraph workflow API documentation for the OHMind multi-agent system

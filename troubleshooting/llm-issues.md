@@ -1,3 +1,10 @@
+---
+title: LLM Provider Issues
+description: "Solutions for AI model access, API errors, and response handling problems"
+parent: Troubleshooting
+nav_order: 3
+---
+
 # LLM Provider Issues
 
 > Solutions for AI model access, API errors, and response handling problems

@@ -1,3 +1,10 @@
+---
+title: Session Manager API Reference
+description: "MCP session management for persistent server connections and tool distribution"
+parent: API Reference
+nav_order: 3
+---
+
 # Session Manager API Reference
 
 > MCP session management for persistent server connections and tool distribution

@@ -5,6 +5,8 @@ category: "agents"
 tags: ["supervisor", "routing", "task-planning", "orchestration"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Agent Reference
+nav_order: 1
 ---
 
 # Supervisor Agent

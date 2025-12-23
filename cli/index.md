@@ -5,6 +5,8 @@ category: "cli"
 tags: ["cli", "tui", "textual", "terminal", "interface"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+nav_order: 8
+has_children: true
 ---
 
 # CLI Application

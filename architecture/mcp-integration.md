@@ -5,6 +5,8 @@ category: "architecture"
 tags: ["mcp", "protocol", "servers", "tools", "transport"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Architecture
+nav_order: 4
 ---
 
 # MCP Integration

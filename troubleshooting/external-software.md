@@ -1,3 +1,10 @@
+---
+title: External Software Issues
+description: "Solutions for ORCA, GROMACS, and Multiwfn configuration and execution problems"
+parent: Troubleshooting
+nav_order: 4
+---
+
 # External Software Issues
 
 > Solutions for ORCA, GROMACS, and Multiwfn configuration and execution problems

@@ -1,3 +1,10 @@
+---
+title: Troubleshooting
+description: "Diagnostic tools, common issues, and solutions for OHMind"
+nav_order: 11
+has_children: true
+---
+
 # Troubleshooting Guide
 
 > Diagnostic tools, common issues, and solutions for OHMind

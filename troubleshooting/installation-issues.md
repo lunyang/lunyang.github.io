@@ -1,3 +1,10 @@
+---
+title: Installation Issues
+description: "Solutions for common installation and environment setup problems"
+parent: Troubleshooting
+nav_order: 1
+---
+
 # Installation Issues
 
 > Solutions for common installation and environment setup problems

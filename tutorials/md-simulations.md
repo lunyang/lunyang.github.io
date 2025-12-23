@@ -5,6 +5,8 @@ category: "tutorials"
 tags: ["tutorial", "md", "gromacs", "simulation", "molecular-dynamics"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Tutorials
+nav_order: 3
 ---
 
 # MD Simulations Tutorial

@@ -1,3 +1,10 @@
+---
+title: API Reference
+description: "Comprehensive API documentation for integrating with OHMind programmatically"
+nav_order: 10
+has_children: true
+---
+
 # API Reference
 
 > Comprehensive API documentation for integrating with OHMind programmatically

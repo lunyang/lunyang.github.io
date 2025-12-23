@@ -5,6 +5,8 @@ category: "getting-started"
 tags: ["installation", "setup", "configuration", "external-software"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Getting Started
+nav_order: 2
 ---
 
 # Installation Guide

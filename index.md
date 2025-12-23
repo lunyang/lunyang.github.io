@@ -5,6 +5,7 @@ category: "index"
 tags: ["ohmind", "hem", "multi-agent", "documentation"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+nav_order: 1
 ---
 
 # OHMind Documentation

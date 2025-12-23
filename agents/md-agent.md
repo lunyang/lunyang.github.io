@@ -5,6 +5,8 @@ category: "agents"
 tags: ["molecular-dynamics", "gromacs", "simulations", "polymers"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Agent Reference
+nav_order: 5
 ---
 
 # MD Agent

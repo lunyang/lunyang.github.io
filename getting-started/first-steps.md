@@ -5,6 +5,8 @@ category: "getting-started"
 tags: ["tutorial", "first-steps", "workflow", "examples"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Getting Started
+nav_order: 3
 ---
 
 # First Steps with OHMind

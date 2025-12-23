@@ -5,6 +5,8 @@ category: "mcp-servers"
 tags: ["mcp", "tools", "servers", "protocol"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+nav_order: 6
+has_children: true
 ---
 
 # MCP Server Reference

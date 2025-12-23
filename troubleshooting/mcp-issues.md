@@ -1,3 +1,10 @@
+---
+title: MCP Server Issues
+description: "Solutions for MCP server connection, transport, and tool execution problems"
+parent: Troubleshooting
+nav_order: 2
+---
+
 # MCP Server Issues
 
 > Solutions for MCP server connection, transport, and tool execution problems

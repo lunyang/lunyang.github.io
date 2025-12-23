@@ -5,6 +5,8 @@ category: "cli"
 tags: ["cli", "web", "deployment", "textual-serve", "remote"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: CLI Application
+nav_order: 5
 ---
 
 # Web Deployment

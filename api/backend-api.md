@@ -1,3 +1,10 @@
+---
+title: Backend API Reference
+description: "FastAPI REST endpoints for interacting with the OHMind multi-agent system"
+parent: API Reference
+nav_order: 1
+---
+
 # Backend API Reference
 
 > FastAPI REST endpoints for interacting with the OHMind multi-agent system

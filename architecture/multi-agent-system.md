@@ -5,6 +5,8 @@ category: "architecture"
 tags: ["agents", "langgraph", "supervisor", "routing", "workflow"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Architecture
+nav_order: 2
 ---
 
 # Multi-Agent System Architecture

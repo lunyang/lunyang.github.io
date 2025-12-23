@@ -5,6 +5,8 @@ category: "configuration"
 tags: ["llm", "openai", "azure", "configuration", "api"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Configuration Overview
+nav_order: 3
 ---
 
 # LLM Providers

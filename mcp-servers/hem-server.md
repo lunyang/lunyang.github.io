@@ -5,6 +5,8 @@ category: "mcp-servers"
 tags: ["hem", "pso", "optimization", "cation", "backbone"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: MCP Server Reference
+nav_order: 2
 ---
 
 # OHMind-HEMDesign MCP Server

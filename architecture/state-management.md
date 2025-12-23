@@ -5,6 +5,8 @@ category: "architecture"
 tags: ["state", "agentstate", "data-flow", "messages", "langgraph"]
 last_updated: "2025-12-23"
 version: "1.0.0"
+parent: Architecture
+nav_order: 3
 ---
 
 # State Management
