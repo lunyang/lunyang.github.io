@@ -95,6 +95,7 @@ python -m OHMind_agent.MCP.Multiwfn.server --transport streamable-http --port 81
 Basic wavefunction analysis for a given input file.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file (fchk/wfn/gbw/out) |
@@ -106,6 +107,7 @@ Basic wavefunction analysis for a given input file.
 Analyze HOMO, LUMO, and other molecular orbitals.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to `.out` or `.gbw` file, OR results_directory |
@@ -128,12 +130,14 @@ Analyze HOMO, LUMO, and other molecular orbitals.
 Calculate atomic charges using various methods.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
 | `methods` | array | No | Charge methods to use |
 
 **Available Methods**:
+
 | Method | Description |
 |--------|-------------|
 | `mulliken` | Mulliken population analysis |
@@ -150,12 +154,14 @@ Calculate atomic charges using various methods.
 Analyze electron density using various methods.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
 | `analysis_type` | string | Yes | Analysis type |
 
 **Analysis Types**:
+
 | Type | Description |
 |------|-------------|
 | `aim` | Atoms in Molecules (Bader) analysis |
@@ -170,6 +176,7 @@ Analyze electron density using various methods.
 Analyze chemical bonds and bond orders.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
@@ -184,12 +191,14 @@ Analyze chemical bonds and bond orders.
 Analyze noncovalent interactions.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
 | `analysis_type` | string | Yes | Analysis type |
 
 **Analysis Types**:
+
 | Type | Description |
 |------|-------------|
 | `rdg` | Reduced Density Gradient |
@@ -204,6 +213,7 @@ Analyze noncovalent interactions.
 Calculate aromaticity indices.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
@@ -216,6 +226,7 @@ Calculate aromaticity indices.
 Energy decomposition analysis.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
@@ -230,6 +241,7 @@ Energy decomposition analysis.
 Simulate various spectra from computed properties.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction/output file |
@@ -237,6 +249,7 @@ Simulate various spectra from computed properties.
 | `broadening` | float | No | Peak broadening parameter |
 
 **Spectrum Types**:
+
 | Type | Description |
 |------|-------------|
 | `uv-vis` | UV-Visible absorption |
@@ -255,6 +268,7 @@ Simulate various spectra from computed properties.
 Generate cube files for densities and orbitals.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
@@ -274,6 +288,7 @@ Generate cube files for densities and orbitals.
 High-level orbital visualization orchestration.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
@@ -287,6 +302,7 @@ High-level orbital visualization orchestration.
 Convenience tool to quickly visualize HOMO/LUMO.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |
@@ -298,6 +314,7 @@ Convenience tool to quickly visualize HOMO/LUMO.
 2D slice plotting of orbitals/densities.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `cube_file` | string | Yes | Path to cube file |
@@ -311,6 +328,7 @@ Convenience tool to quickly visualize HOMO/LUMO.
 3D orbital rendering with VMD/Tachyon style.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `cube_file` | string | Yes | Path to cube file |
@@ -326,6 +344,7 @@ Convenience tool to quickly visualize HOMO/LUMO.
 Post-processing of MD trajectories.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `trajectory` | string | Yes | Path to trajectory file |
@@ -341,6 +360,7 @@ Post-processing of MD trajectories.
 Adaptive Natural Density Partitioning analysis.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_file` | string | Yes | Path to wavefunction file |

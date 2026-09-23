@@ -147,6 +147,7 @@ List available cation families and initial SMILES templates.
 Validate a prospective optimization configuration before running.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `backbone` | string | Yes | Backbone identifier (e.g., `PBF_BB_1`) |
@@ -156,6 +157,7 @@ Validate a prospective optimization configuration before running.
 **Returns**: Validation result with any issues found
 
 **Property Modes**:
+
 | Mode | Description |
 |------|-------------|
 | `multi` | Multi-objective (EC, EWU, ESR combined) |
@@ -172,6 +174,7 @@ Validate a prospective optimization configuration before running.
 Launch PSO-based optimization to design new cation structures.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `backbone` | string | Yes | Target backbone (e.g., `PBF_BB_1`) |
@@ -203,6 +206,7 @@ Launch PSO-based optimization to design new cation structures.
 Check results from completed optimization runs.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `save_path` | string | No | Workspace directory |
@@ -218,6 +222,7 @@ Check results from completed optimization runs.
 Stream recent optimization log lines for monitoring.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `backbone` | string | Yes | Backbone identifier |
@@ -231,6 +236,7 @@ Stream recent optimization log lines for monitoring.
 List running optimization jobs or terminate one.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `backbone` | string | No | Filter by backbone |

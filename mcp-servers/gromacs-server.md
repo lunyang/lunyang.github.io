@@ -103,6 +103,7 @@ python -m OHMind_agent.MCP.GROMACS.server --transport streamable-http --port 810
 Complete IEM MD workflow from monomer SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Monomer SMILES |
@@ -123,6 +124,7 @@ Complete IEM MD workflow from monomer SMILES.
 Full EM → NVT → NPT → MD pipeline.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `gro_file` | string | Yes | Initial coordinates |
@@ -142,6 +144,7 @@ Full EM → NVT → NPT → MD pipeline.
 Calculate ion content from monomer SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Monomer SMILES string |
@@ -153,6 +156,7 @@ Calculate ion content from monomer SMILES.
 Advanced analysis of ion-exchange groups in monomers.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Monomer SMILES string |
@@ -166,6 +170,7 @@ Advanced analysis of ion-exchange groups in monomers.
 Build oligomer/polymer PDB structures from monomer SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Monomer SMILES |
@@ -179,6 +184,7 @@ Build oligomer/polymer PDB structures from monomer SMILES.
 End-to-end workflow from polymer PDB to GROMACS `.itp` file.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `pdb_file` | string | Yes | Path to polymer PDB |
@@ -195,6 +201,7 @@ Uses Antechamber + tleap + conversion + extraction pipeline.
 Run Antechamber on a molecule for charges and atom types.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `pdb_file` | string | Yes | Input PDB file |
@@ -207,6 +214,7 @@ Run Antechamber on a molecule for charges and atom types.
 Produce HEAD/CHAIN/TAIL mainchain definitions.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `antechamber_output` | string | Yes | Path to Antechamber output |
@@ -218,6 +226,7 @@ Produce HEAD/CHAIN/TAIL mainchain definitions.
 Generate PREPI residue files from mainchain definitions.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `mainchain_files` | string | Yes | Path to mainchain files |
@@ -229,6 +238,7 @@ Generate PREPI residue files from mainchain definitions.
 Build polymer chains with tleap for topology generation.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `prepi_file` | string | Yes | PREPI residue file |
@@ -242,6 +252,7 @@ Build polymer chains with tleap for topology generation.
 Convert AMBER topologies to GROMACS formats.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `prmtop` | string | Yes | AMBER parameter file |
@@ -254,6 +265,7 @@ Convert AMBER topologies to GROMACS formats.
 Extract `forcefield.itp` and monomer `.itp` from a `.top` file.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `top_file` | string | Yes | GROMACS topology file |
@@ -267,6 +279,7 @@ Extract `forcefield.itp` and monomer `.itp` from a `.top` file.
 Compute system composition and charge balance.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `polymer_charge` | integer | Yes | Total polymer charge |
@@ -276,6 +289,7 @@ Compute system composition and charge balance.
 **Returns**: System composition details
 
 **Available Ion Types**:
+
 | Ion | Charge |
 |-----|--------|
 | `OH` | -1 |
@@ -293,6 +307,7 @@ Compute system composition and charge balance.
 Build system `.top` with polymers, ions, and water.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `polymer_itp` | string | Yes | Polymer ITP file |
@@ -307,6 +322,7 @@ Build system `.top` with polymers, ions, and water.
 Run PACKMOL-based initial packing.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `components` | array | Yes | System components |
@@ -319,6 +335,7 @@ Run PACKMOL-based initial packing.
 Use `gmx editconf` to define simulation box.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `input_gro` | string | Yes | Input coordinate file |
@@ -334,6 +351,7 @@ Use `gmx editconf` to define simulation box.
 Generate MDP files for different simulation phases.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `simulation_type` | string | Yes | `em`, `nvt`, `npt`, or `md` |
@@ -345,6 +363,7 @@ Generate MDP files for different simulation phases.
 **Returns**: Path to MDP file
 
 **Simulation Types**:
+
 | Type | Description |
 |------|-------------|
 | `em` | Energy minimization |
@@ -357,6 +376,7 @@ Generate MDP files for different simulation phases.
 Prepare TPR files via `gmx grompp`.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `mdp_file` | string | Yes | MDP parameter file |
@@ -372,6 +392,7 @@ Prepare TPR files via `gmx grompp`.
 Execute MD runs with `gmx mdrun`.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `tpr_file` | string | Yes | TPR input file |
@@ -386,6 +407,7 @@ Execute MD runs with `gmx mdrun`.
 Compute MSD and diffusion coefficients from trajectories.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `trajectory` | string | Yes | Trajectory file (.xtc, .trr) |
@@ -399,6 +421,7 @@ Compute MSD and diffusion coefficients from trajectories.
 Analyze energies from `.edr` files.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `edr_file` | string | Yes | Energy file |
@@ -413,6 +436,7 @@ Analyze energies from `.edr` files.
 Get detailed info for a water model.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `model_name` | string | Yes | Water model name |
@@ -420,6 +444,7 @@ Get detailed info for a water model.
 **Returns**: Model parameters and usage notes
 
 **Available Water Models**:
+
 | Model | Description |
 |-------|-------------|
 | `spce` | SPC/E (recommended for IEMs) |
@@ -446,6 +471,7 @@ Report current configuration and work directory.
 Change the default work directory.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `new_directory` | string | Yes | New work directory path |

@@ -1,6 +1,7 @@
-"""Check built-site local links and fragment targets using the Python standard library."""
+"""Check built-site links, fragments, and unrendered Markdown tables."""
 from html.parser import HTMLParser
 from pathlib import Path
+import re
 import sys
 from urllib.parse import unquote, urljoin, urlsplit
 
@@ -10,9 +11,21 @@ class Page(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.ids = set()
         self.links = []
+        self.in_main = False
+        self.paragraph = None
+        self.unrendered_tables = []
+        self.table_count = 0
         self.feed(text)
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'main':
+            self.in_main = True
+        if self.in_main and tag == 'table':
+            self.table_count += 1
+        if self.in_main and tag == 'p':
+            self.paragraph = []
+        if tag == 'br' and self.paragraph is not None:
+            self.paragraph.append('\n')
         attrs = dict(attrs)
         if attrs.get('id'):
             self.ids.add(attrs['id'])
@@ -21,6 +34,20 @@ class Page(HTMLParser):
         for key in ('href', 'src'):
             if attrs.get(key):
                 self.links.append(attrs[key])
+
+    def handle_data(self, data):
+        if self.paragraph is not None:
+            self.paragraph.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == 'p' and self.paragraph is not None:
+            text = ''.join(self.paragraph)
+            # Kramdown smart punctuation converts raw table dashes to en/em dashes.
+            if re.search(r'\|\s*:?[-–—]{2,}:?\s*\|', text):
+                self.unrendered_tables.append(' '.join(text.split())[:120])
+            self.paragraph = None
+        if tag == 'main':
+            self.in_main = False
 
 
 def main():
@@ -31,6 +58,8 @@ def main():
     errors = set()
     checked = 0
     for source, page in pages.items():
+        for index, snippet in enumerate(page.unrendered_tables, start=1):
+            errors.add(f'{source.relative_to(root)}: unrendered table {index}: {snippet}')
         source_url = '/' + source.relative_to(root).as_posix()
         for href in page.links:
             parts = urlsplit(href)
@@ -52,6 +81,8 @@ def main():
     for error in sorted(errors):
         print(error)
     print(f'{len(pages)} HTML pages; {checked} internal references; {len(errors)} errors')
+    print(f'{sum(p.table_count for p in pages.values())} rendered content tables; '
+          f'{sum(len(p.unrendered_tables) for p in pages.values())} unrendered tables')
     return bool(errors)
 
 

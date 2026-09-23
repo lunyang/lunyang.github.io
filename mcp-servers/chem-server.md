@@ -91,6 +91,7 @@ python -m OHMind_agent.MCP.Chem.server --transport streamable-http --port 8101
 Validate a molecular SMILES string and explain syntax issues.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | SMILES string to validate |
@@ -109,6 +110,7 @@ Validate a molecular SMILES string and explain syntax issues.
 Canonicalize a SMILES string to standard form.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -122,6 +124,7 @@ Canonicalize a SMILES string to standard form.
 Validate reaction SMILES format (`reactants>reagents>products`).
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `reaction_smiles` | string | Yes | Reaction SMILES string |
@@ -135,6 +138,7 @@ Validate reaction SMILES format (`reactants>reagents>products`).
 Compute exact molecular weight from SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -154,6 +158,7 @@ Compute exact molecular weight from SMILES.
 Count atoms of each element in a molecule.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -165,6 +170,7 @@ Count atoms of each element in a molecule.
 Get molecular formula from SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -176,6 +182,7 @@ Get molecular formula from SMILES.
 Detect common functional groups from SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -194,6 +201,7 @@ Detect common functional groups from SMILES.
 Calculate Tanimoto similarity between two molecules.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles1` | string | Yes | First molecule SMILES |
@@ -208,6 +216,7 @@ Calculate Tanimoto similarity between two molecules.
 Convert IUPAC name to SMILES (via PubChem).
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `iupac_name` | string | Yes | IUPAC chemical name |
@@ -219,6 +228,7 @@ Convert IUPAC name to SMILES (via PubChem).
 Convert SMILES to IUPAC name.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -230,6 +240,7 @@ Convert SMILES to IUPAC name.
 Convert common/brand/chemical name to SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `name` | string | Yes | Chemical name |
@@ -241,6 +252,7 @@ Convert common/brand/chemical name to SMILES.
 Look up CAS number from SMILES (via PubChem).
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -254,6 +266,7 @@ Look up CAS number from SMILES (via PubChem).
 Convert SELFIES to SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `selfies` | string | Yes | SELFIES string |
@@ -265,6 +278,7 @@ Convert SELFIES to SMILES.
 Convert SMILES to SELFIES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -278,6 +292,7 @@ Convert SMILES to SELFIES.
 Render a 2D structure image from SMILES.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -293,6 +308,7 @@ Render a 2D structure image from SMILES.
 Generate natural-language description of a molecule using MolT5 model.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -308,6 +324,7 @@ Generate natural-language description of a molecule using MolT5 model.
 Chemistry-aware web search using Tavily API.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `query` | string | Yes | Search query |

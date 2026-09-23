@@ -96,6 +96,7 @@ python -m OHMind_agent.MCP.ORCA.server --transport streamable-http --port 8103
 Convert SMILES to 3D XYZ coordinates using RDKit.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `smiles` | string | Yes | Input SMILES string |
@@ -118,6 +119,7 @@ Convert SMILES to 3D XYZ coordinates using RDKit.
 Single-point energy calculation at fixed geometry.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | XYZ coordinates |
@@ -145,6 +147,7 @@ Single-point energy calculation at fixed geometry.
 Optimize molecular geometry to find minimum energy structure.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | Initial XYZ coordinates |
@@ -163,6 +166,7 @@ Optimize molecular geometry to find minimum energy structure.
 Vibrational frequency calculation for thermochemistry.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | XYZ coordinates (should be optimized) |
@@ -181,6 +185,7 @@ Vibrational frequency calculation for thermochemistry.
 Proton affinity and approximate pKa for acidic groups.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | XYZ coordinates |
@@ -194,6 +199,7 @@ Proton affinity and approximate pKa for acidic groups.
 Ion-functional group binding energies.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `complex_xyz` | string | Yes | Ion-molecule complex coordinates |
@@ -209,6 +215,7 @@ Ion-functional group binding energies.
 Solvation/hydration energies for ions.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | Ion or ion-water cluster coordinates |
@@ -222,6 +229,7 @@ Solvation/hydration energies for ions.
 Calculate atomic charges using various methods.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | XYZ coordinates |
@@ -241,6 +249,7 @@ Calculate atomic charges using various methods.
 Transition state search with optional frequency verification.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | Initial TS guess coordinates |
@@ -256,6 +265,7 @@ Transition state search with optional frequency verification.
 NMR shielding and chemical shifts.
 
 **Parameters**:
+
 | Name | Type | Required | Description |
 |------|------|----------|-------------|
 | `xyz_string` | string | Yes | XYZ coordinates |
