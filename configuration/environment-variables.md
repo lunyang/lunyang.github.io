@@ -1,9 +1,10 @@
 ---
+permalink: /configuration/environment-variables/
 title: "Environment Variables"
 description: "Complete reference for all OHMind environment variables including LLM, workspace, and external software configuration"
 category: "configuration"
 tags: ["environment", "variables", "configuration", "setup"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Configuration Overview
 nav_order: 1
@@ -404,12 +405,14 @@ OHMind_workspace=/tmp/test_workspace python -m OHMind_cli
 
 ## See Also
 
-- [Configuration Overview](./index.md) - Configuration system overview
-- [MCP Configuration](./mcp-config.md) - MCP server setup
-- [LLM Providers](./llm-providers.md) - Provider-specific details
-- [Workspace Setup](./workspace-setup.md) - Directory structure
-- [Installation Issues](../troubleshooting/installation-issues.md) - Common setup problems
+- [Configuration Overview]({% link configuration/index.md %}) - Configuration system overview
+- [MCP Configuration]({% link configuration/mcp-config.md %}) - MCP server setup
+- [LLM Providers]({% link configuration/llm-providers.md %}) - Provider-specific details
+- [Workspace Setup]({% link configuration/workspace-setup.md %}) - Directory structure
+- [Installation Issues]({% link troubleshooting/installation-issues.md %}) - Common setup problems
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v1.0.0*
+## Memory, persistence, and recovery settings
+
+The [Memory and Persistence reference]({% link configuration/memory-persistence.md %}#settings-and-defaults) lists `DURABLE_STATE_ENABLED`, database URLs, all `MEMORY_*` controls, `ACTIVE_POLICY_VERSION`, `RECOVERY_POLICY_DIRECTORY`, `RESULTS_ROOT`, and `CASE_STUDY_ROOT` with source defaults. Both durable state and memory are disabled by default.

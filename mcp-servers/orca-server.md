@@ -1,4 +1,5 @@
 ---
+permalink: /mcp-servers/orca-server/
 title: "OHMind-ORCA MCP Server"
 description: "Quantum chemistry MCP server for ORCA calculations"
 category: "mcp-servers"
@@ -414,11 +415,11 @@ PYTHONPATH=/path/to/OHMind \
 
 ## See Also
 
-- [MCP Server Reference](./index.md) - Overview of all servers
-- [QM Agent](../agents/qm-agent.md) - Agent documentation
-- [Multiwfn Server](./multiwfn-server.md) - For result analysis
-- [QM Calculations Tutorial](../tutorials/qm-calculations.md) - Step-by-step guide
-- [OHQM Module](../core-library/ohqm.md) - QM utilities
+- [MCP Server Reference]({% link mcp-servers/index.md %}) - Overview of all servers
+- [QM Agent]({% link agents/qm-agent.md %}) - Agent documentation
+- [Multiwfn Server]({% link mcp-servers/multiwfn-server.md %}) - For result analysis
+- [QM Calculations Tutorial]({% link tutorials/qm-calculations.md %}) - Step-by-step guide
+- [OHQM Module]({% link core-library/ohqm.md %}) - QM utilities
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

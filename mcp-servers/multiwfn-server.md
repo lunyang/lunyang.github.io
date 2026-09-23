@@ -1,4 +1,5 @@
 ---
+permalink: /mcp-servers/multiwfn-server/
 title: "OHMind-Multiwfn MCP Server"
 description: "Wavefunction analysis MCP server using Multiwfn"
 category: "mcp-servers"
@@ -505,10 +506,10 @@ PYTHONPATH=/path/to/OHMind \
 
 ## See Also
 
-- [MCP Server Reference](./index.md) - Overview of all servers
-- [Multiwfn Agent](../agents/multiwfn-agent.md) - Agent documentation
-- [ORCA Server](./orca-server.md) - For running calculations
-- [QM Calculations Tutorial](../tutorials/qm-calculations.md) - Step-by-step guide
+- [MCP Server Reference]({% link mcp-servers/index.md %}) - Overview of all servers
+- [Multiwfn Agent]({% link agents/multiwfn-agent.md %}) - Agent documentation
+- [ORCA Server]({% link mcp-servers/orca-server.md %}) - For running calculations
+- [QM Calculations Tutorial]({% link tutorials/qm-calculations.md %}) - Step-by-step guide
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

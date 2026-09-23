@@ -1,4 +1,5 @@
 ---
+permalink: /agents/rag-agent/
 title: "RAG Agent"
 description: "Specialized agent for scientific literature search and retrieval"
 category: "agents"
@@ -269,10 +270,10 @@ Documents are chunked and indexed with metadata:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [Web Search Agent](./web-search-agent.md) - For real-time web information
-- [Literature Search Tutorial](../tutorials/literature-search.md) - Step-by-step guide
-- [Configuration Reference](../configuration/index.md) - Qdrant setup
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [Web Search Agent]({% link agents/web-search-agent.md %}) - For real-time web information
+- [Literature Search Tutorial]({% link tutorials/literature-search.md %}) - Step-by-step guide
+- [Configuration Reference]({% link configuration/index.md %}) - Qdrant setup
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

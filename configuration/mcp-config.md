@@ -1,9 +1,10 @@
 ---
+permalink: /configuration/mcp-config/
 title: "MCP Configuration"
 description: "Guide to configuring MCP servers in OHMind including mcp.json format, transport modes, and server settings"
 category: "configuration"
 tags: ["mcp", "configuration", "servers", "transport"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Configuration Overview
 nav_order: 2
@@ -448,7 +449,7 @@ The Chainlit web UI requires manual MCP server configuration through its interfa
 
 1. Start the backend and UI:
    ```bash
-   ./start_apps.sh
+   ./start_OHMind.sh
    ```
 
 2. Open the UI at `http://localhost:8000`
@@ -520,11 +521,11 @@ chmod u+rwx $HEM_SAVE_PATH $QM_WORK_DIR $MD_WORK_DIR $MULTIWFN_WORK_DIR
 
 ## See Also
 
-- [Configuration Overview](./index.md) - Configuration system overview
-- [Environment Variables](./environment-variables.md) - All environment variables
-- [MCP Servers](../mcp-servers/index.md) - MCP server reference
-- [MCP Issues](../troubleshooting/mcp-issues.md) - Troubleshooting guide
+- [Configuration Overview]({% link configuration/index.md %}) - Configuration system overview
+- [Environment Variables]({% link configuration/environment-variables.md %}) - All environment variables
+- [MCP Servers]({% link mcp-servers/index.md %}) - MCP server reference
+- [MCP Issues]({% link troubleshooting/mcp-issues.md %}) - Troubleshooting guide
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v1.0.0*
+*Updated for the source snapshot described in [Documentation status](/release-notes/).*

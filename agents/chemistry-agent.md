@@ -1,4 +1,5 @@
 ---
+permalink: /agents/chemistry-agent/
 title: "Chemistry Agent"
 description: "Specialized agent for molecular operations and chemistry tasks"
 category: "agents"
@@ -292,9 +293,9 @@ if 'identify_functional_groups' in collected_tool_results:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [Chem MCP Server](../mcp-servers/chem-server.md) - Tool documentation
-- [SMILES Tutorial](../tutorials/qm-calculations.md) - Working with molecular structures
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [Chem MCP Server]({% link mcp-servers/chem-server.md %}) - Tool documentation
+- [SMILES Tutorial]({% link tutorials/qm-calculations.md %}) - Working with molecular structures
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

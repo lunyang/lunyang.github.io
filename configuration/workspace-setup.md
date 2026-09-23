@@ -1,9 +1,10 @@
 ---
+permalink: /configuration/workspace-setup/
 title: "Workspace Setup"
 description: "Guide to setting up the OHMind workspace directory structure, Qdrant vector database, permissions, and storage requirements"
 category: "configuration"
 tags: ["workspace", "directory", "qdrant", "storage", "setup"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Configuration Overview
 nav_order: 4
@@ -396,12 +397,12 @@ mv project_archive_*.tar.gz /archive/ohmind/
 
 ## Automatic Setup
 
-### Using start_apps.sh
+### Using start_OHMind.sh
 
 The startup script automatically sets up workspace paths:
 
 ```bash
-./start_apps.sh
+./start_OHMind.sh
 ```
 
 **What it does:**
@@ -497,11 +498,13 @@ cp -r ${OHMind_workspace}.backup/HEM/* $OHMind_workspace/HEM/
 
 ## See Also
 
-- [Configuration Overview](./index.md) - Configuration system overview
-- [Environment Variables](./environment-variables.md) - All environment variables
-- [Installation Issues](../troubleshooting/installation-issues.md) - Setup problems
-- [RAG Agent](../agents/rag-agent.md) - Vector database usage
+- [Configuration Overview]({% link configuration/index.md %}) - Configuration system overview
+- [Environment Variables]({% link configuration/environment-variables.md %}) - All environment variables
+- [Installation Issues]({% link troubleshooting/installation-issues.md %}) - Setup problems
+- [RAG Agent]({% link agents/rag-agent.md %}) - Vector database usage
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v1.0.0*
+## Recovery artifacts and results
+
+`RESULTS_ROOT` and `CASE_STUDY_ROOT` configure scientific result storage separately from mutable chat state. Use absolute paths. Each HEM run records a `job_state.json`, optimizer checkpoints, logs, and recovery trace events when applicable. Keep original checkpoints when resuming into a new run. `RECOVERY_POLICY_DIRECTORY` selects the file policy registry; it is separate from both the workspace and database ledger. See [Resume PSO]({% link tutorials/pso-resume.md %}).

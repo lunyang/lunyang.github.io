@@ -1,4 +1,5 @@
 ---
+permalink: /core-library/ohqm/
 title: "OHQM Module"
 description: "Quantum chemistry utilities for ORCA integration and conformer search"
 category: "core-library"
@@ -563,11 +564,11 @@ mult = 1
 
 ## See Also
 
-- [Core Library Index](./index.md) - Module overview
-- [OHMD Module](./ohmd.md) - MD utilities
-- [QM Agent](../agents/qm-agent.md) - Agent using OHQM
-- [ORCA Server](../mcp-servers/orca-server.md) - MCP server tools
-- [Multiwfn Server](../mcp-servers/multiwfn-server.md) - Wavefunction analysis
+- [Core Library Index]({% link core-library/index.md %}) - Module overview
+- [OHMD Module]({% link core-library/ohmd.md %}) - MD utilities
+- [QM Agent]({% link agents/qm-agent.md %}) - Agent using OHQM
+- [ORCA Server]({% link mcp-servers/orca-server.md %}) - MCP server tools
+- [Multiwfn Server]({% link mcp-servers/multiwfn-server.md %}) - Wavefunction analysis
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

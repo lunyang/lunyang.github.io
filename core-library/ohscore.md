@@ -1,4 +1,5 @@
 ---
+permalink: /core-library/ohscore/
 title: "OHScore Module"
 description: "Property prediction metrics and molecular evaluation functions"
 category: "core-library"
@@ -624,10 +625,10 @@ def mapper(n_jobs):
 
 ## See Also
 
-- [Core Library Index](./index.md) - Module overview
-- [OHVAE Module](./ohvae.md) - Molecular generation
-- [OHPSO Module](./ohpso.md) - PSO optimization
-- [HEM Agent](../agents/hem-agent.md) - Agent using OHScore
+- [Core Library Index]({% link core-library/index.md %}) - Module overview
+- [OHVAE Module]({% link core-library/ohvae.md %}) - Molecular generation
+- [OHPSO Module]({% link core-library/ohpso.md %}) - PSO optimization
+- [HEM Agent]({% link agents/hem-agent.md %}) - Agent using OHScore
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

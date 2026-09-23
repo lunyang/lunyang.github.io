@@ -1,4 +1,5 @@
 ---
+permalink: /mcp-servers/gromacs-server/
 title: "OHMind-GROMACS MCP Server"
 description: "Molecular dynamics MCP server for IEM simulations using GROMACS"
 category: "mcp-servers"
@@ -619,10 +620,10 @@ PYTHONPATH=/path/to/OHMind \
 
 ## See Also
 
-- [MCP Server Reference](./index.md) - Overview of all servers
-- [MD Agent](../agents/md-agent.md) - Agent documentation
-- [MD Simulations Tutorial](../tutorials/md-simulations.md) - Step-by-step guide
-- [OHMD Module](../core-library/ohmd.md) - MD utilities
+- [MCP Server Reference]({% link mcp-servers/index.md %}) - Overview of all servers
+- [MD Agent]({% link agents/md-agent.md %}) - Agent documentation
+- [MD Simulations Tutorial]({% link tutorials/md-simulations.md %}) - Step-by-step guide
+- [OHMD Module]({% link core-library/ohmd.md %}) - MD utilities
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

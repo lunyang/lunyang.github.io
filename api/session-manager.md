@@ -1,4 +1,5 @@
 ---
+permalink: /api/session-manager/
 title: Session Manager API Reference
 description: "MCP session management for persistent server connections and tool distribution"
 parent: API Reference
@@ -690,11 +691,11 @@ async def check_mcp_health(manager: MCPSessionManager) -> Dict[str, bool]:
 
 ## See Also
 
-- [API Overview](./index.md) - API architecture
-- [Backend API](./backend-api.md) - REST endpoints
-- [Workflow API](./workflow-api.md) - LangGraph workflow
-- [MCP Integration](../architecture/mcp-integration.md) - MCP architecture
-- [MCP Servers](../mcp-servers/index.md) - Server documentation
+- [API Overview]({% link api/index.md %}) - API architecture
+- [Backend API]({% link api/backend-api.md %}) - REST endpoints
+- [Workflow API]({% link api/workflow-api.md %}) - LangGraph workflow
+- [MCP Integration]({% link architecture/mcp-integration.md %}) - MCP architecture
+- [MCP Servers]({% link mcp-servers/index.md %}) - Server documentation
 
 ---
 

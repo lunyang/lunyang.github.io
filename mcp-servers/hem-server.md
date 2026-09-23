@@ -1,9 +1,10 @@
 ---
+permalink: /mcp-servers/hem-server/
 title: "OHMind-HEMDesign MCP Server"
 description: "HEM optimization MCP server for PSO-based cation design"
 category: "mcp-servers"
 tags: ["hem", "pso", "optimization", "cation", "backbone"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: MCP Server Reference
 nav_order: 2
@@ -388,10 +389,15 @@ PYTHONPATH=/path/to/OHMind \
 
 ## See Also
 
-- [MCP Server Reference](./index.md) - Overview of all servers
-- [HEM Agent](../agents/hem-agent.md) - Agent documentation
-- [HEM Optimization Tutorial](../tutorials/hem-optimization.md) - Step-by-step guide
-- [OHPSO Module](../core-library/ohpso.md) - PSO implementation details
+- [MCP Server Reference]({% link mcp-servers/index.md %}) - Overview of all servers
+- [HEM Agent]({% link agents/hem-agent.md %}) - Agent documentation
+- [HEM Optimization Tutorial]({% link tutorials/hem-optimization.md %}) - Step-by-step guide
+- [OHPSO Module]({% link core-library/ohpso.md %}) - PSO implementation details
 
 ---
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+
+## Checkpoints and resumable jobs
+
+`optimize_hem_design` additionally accepts `seed: int = 42` and `resume_from: str = None`. Its `steps` value is the total target iteration count when resuming. Match saved configuration and supply an intact optimizer JSON checkpoint. The standard tool uses bounded timeout recovery but does not automatically use recovery memory or commit episodes. See [Resume PSO]({% link tutorials/pso-resume.md %}).
+
+Job status uses persisted `job_state.json` records; after restart, formerly active jobs are marked failed because their worker process no longer exists. Check terminal status, logs, and checkpoint integrity before resuming.

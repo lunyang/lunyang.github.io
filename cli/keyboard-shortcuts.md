@@ -1,4 +1,5 @@
 ---
+permalink: /cli/keyboard-shortcuts/
 title: "Keyboard Shortcuts"
 description: "Complete keyboard shortcut reference for OHMind CLI"
 category: "cli"
@@ -206,9 +207,9 @@ BINDINGS = [
 
 ## See Also
 
-- [CLI Overview](./index.md) - Getting started with the CLI
-- [Commands Reference](./commands.md) - Slash command documentation
-- [Workspace Sidebar](./workspace-sidebar.md) - File browser features
+- [CLI Overview]({% link cli/index.md %}) - Getting started with the CLI
+- [Commands Reference]({% link cli/commands.md %}) - Slash command documentation
+- [Workspace Sidebar]({% link cli/workspace-sidebar.md %}) - File browser features
 
 ---
 

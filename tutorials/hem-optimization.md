@@ -1,9 +1,10 @@
 ---
+permalink: /tutorials/hem-optimization/
 title: "HEM Optimization Tutorial"
 description: "Step-by-step guide to designing new cations for Hydroxide Exchange Membranes using PSO optimization"
 category: "tutorials"
 tags: ["tutorial", "hem", "pso", "optimization", "cation-design"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Tutorials
 nav_order: 1
@@ -375,9 +376,9 @@ List any running HEM optimization jobs and kill any that appear stuck.
 After completing this tutorial:
 
 1. **Try different combinations** - Explore other backbone-cation pairs
-2. **Validate with QM** - Use [QM Calculations](./qm-calculations.md) to verify top candidates
-3. **Run MD simulations** - Use [MD Simulations](./md-simulations.md) for property validation
-4. **Search literature** - Use [Literature Search](./literature-search.md) to compare with known compounds
+2. **Validate with QM** - Use [QM Calculations]({% link tutorials/qm-calculations.md %}) to verify top candidates
+3. **Run MD simulations** - Use [MD Simulations]({% link tutorials/md-simulations.md %}) for property validation
+4. **Search literature** - Use [Literature Search]({% link tutorials/literature-search.md %}) to compare with known compounds
 
 ### Suggested Follow-up Prompts
 
@@ -393,11 +394,13 @@ their reported properties with my optimization predictions.
 
 ## See Also
 
-- [HEM Agent](../agents/hem-agent.md) - Agent capabilities
-- [HEMDesign MCP Server](../mcp-servers/hem-server.md) - Available tools
-- [OHPSO Module](../core-library/ohpso.md) - PSO algorithm details
-- [Multi-Step Workflows](./multi-step-workflows.md) - Complex pipelines
+- [HEM Agent]({% link agents/hem-agent.md %}) - Agent capabilities
+- [HEMDesign MCP Server]({% link mcp-servers/hem-server.md %}) - Available tools
+- [OHPSO Module]({% link core-library/ohpso.md %}) - PSO algorithm details
+- [Multi-Step Workflows]({% link tutorials/multi-step-workflows.md %}) - Complex pipelines
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v1.0.0*
+## Resume and validate interrupted optimization
+
+The HEM optimizer accepts `seed` and `resume_from`. Retain the returned run directory and inspect `job_state.json` and optimizer checkpoints. Follow [Resume PSO Optimization]({% link tutorials/pso-resume.md %}) for exact argument matching, total-step semantics, and post-recovery checks.

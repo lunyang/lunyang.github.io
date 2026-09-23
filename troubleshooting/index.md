@@ -1,8 +1,10 @@
 ---
+permalink: /troubleshooting/
 title: Troubleshooting
 description: "Diagnostic tools, common issues, and solutions for OHMind"
 nav_order: 11
 has_children: true
+last_updated: "2026-09-23"
 ---
 
 # Troubleshooting Guide
@@ -26,10 +28,10 @@ This guide helps you diagnose and resolve common issues with OHMind. Issues are 
 
 | Category | Common Symptoms | Guide |
 |----------|-----------------|-------|
-| [Installation](./installation-issues.md) | Import errors, missing packages, environment issues | Setup problems |
-| [MCP Servers](./mcp-issues.md) | Connection failures, tool errors, timeouts | Server connectivity |
-| [LLM Providers](./llm-issues.md) | API errors, rate limits, authentication | AI model access |
-| [External Software](./external-software.md) | ORCA/GROMACS/Multiwfn failures | Computational tools |
+| [Installation]({% link troubleshooting/installation-issues.md %}) | Import errors, missing packages, environment issues | Setup problems |
+| [MCP Servers]({% link troubleshooting/mcp-issues.md %}) | Connection failures, tool errors, timeouts | Server connectivity |
+| [LLM Providers]({% link troubleshooting/llm-issues.md %}) | API errors, rate limits, authentication | AI model access |
+| [External Software]({% link troubleshooting/external-software.md %}) | ORCA/GROMACS/Multiwfn failures | Computational tools |
 
 ## Quick Diagnostics
 
@@ -115,7 +117,7 @@ Problems during setup or environment creation:
 - GPU/CUDA configuration
 - Dependency conflicts
 
-→ See [Installation Issues](./installation-issues.md)
+→ See [Installation Issues]({% link troubleshooting/installation-issues.md %})
 
 ### 🔌 MCP Server Issues
 
@@ -126,7 +128,7 @@ Problems with MCP server connections:
 - Tool execution failures
 - Transport mode issues
 
-→ See [MCP Issues](./mcp-issues.md)
+→ See [MCP Issues]({% link troubleshooting/mcp-issues.md %})
 
 ### 🤖 LLM Provider Issues
 
@@ -137,7 +139,7 @@ Problems with AI model access:
 - Model availability
 - Response parsing errors
 
-→ See [LLM Issues](./llm-issues.md)
+→ See [LLM Issues]({% link troubleshooting/llm-issues.md %})
 
 ### 🧪 External Software Issues
 
@@ -148,7 +150,7 @@ Problems with computational tools:
 - Multiwfn analysis issues
 - Path configuration problems
 
-→ See [External Software Issues](./external-software.md)
+→ See [External Software Issues]({% link troubleshooting/external-software.md %})
 
 ## Diagnostic Commands
 
@@ -342,13 +344,15 @@ When reporting an issue, include:
 
 ## See Also
 
-- [Installation Issues](./installation-issues.md) - Setup and environment problems
-- [MCP Issues](./mcp-issues.md) - Server connection problems
-- [LLM Issues](./llm-issues.md) - AI model access problems
-- [External Software Issues](./external-software.md) - ORCA/GROMACS/Multiwfn problems
-- [Configuration Reference](../configuration/index.md) - Environment setup
-- [Quick Start Guide](../getting-started/quick-start.md) - Initial setup
+- [Installation Issues]({% link troubleshooting/installation-issues.md %}) - Setup and environment problems
+- [MCP Issues]({% link troubleshooting/mcp-issues.md %}) - Server connection problems
+- [LLM Issues]({% link troubleshooting/llm-issues.md %}) - AI model access problems
+- [External Software Issues]({% link troubleshooting/external-software.md %}) - ORCA/GROMACS/Multiwfn problems
+- [Configuration Reference]({% link configuration/index.md %}) - Environment setup
+- [Quick Start Guide]({% link getting-started/quick-start.md %}) - Initial setup
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v0.1.0*
+## Persistence and recovery
+
+See [Memory and Recovery Issues]({% link troubleshooting/memory-recovery.md %}) for migration errors, empty thread lists after restart, shadow-mode behavior, missing episodes, checkpoint failures, and policy-registry mismatches.

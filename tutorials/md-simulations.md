@@ -1,4 +1,5 @@
 ---
+permalink: /tutorials/md-simulations/
 title: "MD Simulations Tutorial"
 description: "Step-by-step guide to running molecular dynamics simulations with GROMACS through OHMind"
 category: "tutorials"
@@ -645,10 +646,10 @@ cation types attached to the same backbone.
 
 ## See Also
 
-- [MD Agent](../agents/md-agent.md) - Agent capabilities
-- [GROMACS MCP Server](../mcp-servers/gromacs-server.md) - Available tools
-- [OHMD Module](../core-library/ohmd.md) - MD utilities
-- [Multi-Step Workflows](./multi-step-workflows.md) - Complex pipelines
+- [MD Agent]({% link agents/md-agent.md %}) - Agent capabilities
+- [GROMACS MCP Server]({% link mcp-servers/gromacs-server.md %}) - Available tools
+- [OHMD Module]({% link core-library/ohmd.md %}) - MD utilities
+- [Multi-Step Workflows]({% link tutorials/multi-step-workflows.md %}) - Complex pipelines
 
 ---
 

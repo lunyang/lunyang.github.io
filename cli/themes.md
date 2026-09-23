@@ -1,4 +1,5 @@
 ---
+permalink: /cli/themes/
 title: "Themes"
 description: "Theme customization and color schemes in OHMind CLI"
 category: "cli"
@@ -254,9 +255,9 @@ Additional styling is defined in `OHMind_cli/ohmind.tcss`. This file contains:
 
 ## See Also
 
-- [CLI Overview](./index.md) - Getting started with the CLI
-- [Keyboard Shortcuts](./keyboard-shortcuts.md) - Navigation shortcuts
-- [Workspace Sidebar](./workspace-sidebar.md) - File browser features
+- [CLI Overview]({% link cli/index.md %}) - Getting started with the CLI
+- [Keyboard Shortcuts]({% link cli/keyboard-shortcuts.md %}) - Navigation shortcuts
+- [Workspace Sidebar]({% link cli/workspace-sidebar.md %}) - File browser features
 
 ---
 

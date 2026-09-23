@@ -1,4 +1,5 @@
 ---
+permalink: /core-library/ohvae/
 title: "OHVAE Module"
 description: "Junction Tree Variational Autoencoder for molecular generation"
 category: "core-library"
@@ -601,11 +602,11 @@ torch.save({
 
 ## See Also
 
-- [Core Library Index](./index.md) - Module overview
-- [OHPSO Module](./ohpso.md) - PSO optimization using OHVAE
-- [OHScore Module](./ohscore.md) - Scoring functions
-- [HEM Agent](../agents/hem-agent.md) - Agent using OHVAE
-- [HEM Server](../mcp-servers/hem-server.md) - MCP server tools
+- [Core Library Index]({% link core-library/index.md %}) - Module overview
+- [OHPSO Module]({% link core-library/ohpso.md %}) - PSO optimization using OHVAE
+- [OHScore Module]({% link core-library/ohscore.md %}) - Scoring functions
+- [HEM Agent]({% link agents/hem-agent.md %}) - Agent using OHVAE
+- [HEM Server]({% link mcp-servers/hem-server.md %}) - MCP server tools
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

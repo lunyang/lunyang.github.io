@@ -1,4 +1,5 @@
 ---
+permalink: /agents/md-agent/
 title: "MD Agent"
 description: "Specialized agent for molecular dynamics simulations via GROMACS"
 category: "agents"
@@ -458,10 +459,10 @@ The following tools require validation:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [GROMACS MCP Server](../mcp-servers/gromacs-server.md) - Tool documentation
-- [MD Simulations Tutorial](../tutorials/md-simulations.md) - Step-by-step guide
-- [OHMD Module](../core-library/ohmd.md) - MD utilities
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [GROMACS MCP Server]({% link mcp-servers/gromacs-server.md %}) - Tool documentation
+- [MD Simulations Tutorial]({% link tutorials/md-simulations.md %}) - Step-by-step guide
+- [OHMD Module]({% link core-library/ohmd.md %}) - MD utilities
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

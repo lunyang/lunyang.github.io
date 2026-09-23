@@ -1,485 +1,110 @@
 ---
+permalink: /getting-started/installation/
+layout: default
 title: "Installation Guide"
-description: "Detailed installation instructions for OHMind on all supported platforms"
-category: "getting-started"
-tags: ["installation", "setup", "configuration", "external-software"]
-last_updated: "2025-12-23"
-version: "1.0.0"
-parent: Getting Started
+parent: "Getting Started"
 nav_order: 2
+last_updated: "2026-09-23"
 ---
 
 # Installation Guide
 
-> Complete installation instructions for OHMind and all external dependencies
+These instructions target the source revision described in [Documentation status]({% link release-notes.md %}). Use Linux, Conda, Python 3.10 or 3.11, and Docker Compose. Scientific workloads determine CPU, memory, GPU, and disk requirements. A fresh installation of the combined scientific and UI dependencies still needs end-to-end validation.
 
-This guide provides detailed installation instructions for OHMind, including all optional external software for full functionality.
-
-## Table of Contents
-
-- [System Requirements](#system-requirements)
-- [Core Installation](#core-installation)
-- [External Software Setup](#external-software-setup)
-- [Environment Configuration](#environment-configuration)
-- [Workspace Setup](#workspace-setup)
-- [Verification](#verification)
-- [Platform-Specific Notes](#platform-specific-notes)
-
-## System Requirements
-
-### Minimum Requirements
-
-| Component | Requirement |
-|-----------|-------------|
-| Operating System | Linux (Ubuntu 20.04+ recommended) |
-| Python | 3.10 or higher |
-| RAM | 16 GB minimum, 32 GB recommended |
-| Storage | 50 GB free space |
-| Package Manager | Conda (Anaconda or Miniconda) |
-
-### Recommended Requirements
-
-| Component | Recommendation |
-|-----------|----------------|
-| GPU | NVIDIA GPU with CUDA 11.8+ |
-| VRAM | 8 GB+ for VAE models |
-| CPU | 8+ cores for MD simulations |
-| Storage | SSD for workspace directory |
-
-### Software Dependencies
-
-OHMind integrates with several external computational chemistry packages:
-
-| Software | Purpose | Required |
-|----------|---------|----------|
-| ORCA | Quantum chemistry calculations | Optional |
-| GROMACS | Molecular dynamics simulations | Optional |
-| Multiwfn | Wavefunction analysis | Optional |
-| Qdrant | Vector database for RAG | Optional |
-| PostgreSQL | Web UI persistence | Optional (UI only) |
-| MinIO | File storage for UI | Optional (UI only) |
-
-## Core Installation
-
-### Step 1: Install Conda
-
-If you don't have Conda installed:
+## Install from source
 
 ```bash
-# Download Miniconda (recommended)
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-
-# Install
-bash Miniconda3-latest-Linux-x86_64.sh
-
-# Restart shell or source
-source ~/.bashrc
-```
-
-### Step 2: Clone the Repository
-
-```bash
-git clone <repository-url> OHMind
+git clone https://github.com/lunyang/OHMind.git
 cd OHMind
-```
-
-### Step 3: Create the Conda Environment
-
-The `environment.yml` file contains all Python dependencies:
-
-```bash
-# Create environment (this may take 10-15 minutes)
 conda env create -f environment.yml
-
-# Activate the environment
 conda activate OHMind
+python -m pip install poetry
+cd OHMind_ui
+poetry install --no-root
+cd ..
 ```
 
-#### What Gets Installed
-
-The environment includes:
-
-**Core ML/AI Libraries:**
-- PyTorch with CUDA support
-- DGL (Deep Graph Library)
-- LangChain + LangGraph
-- Transformers
-
-**Chemistry Libraries:**
-- RDKit for cheminformatics
-- OpenBabel for format conversion
-- ASE for atomic simulations
-
-**Web/UI Libraries:**
-- FastAPI for backend
-- Chainlit for web UI
-- Textual for TUI
-
-**MCP Integration:**
-- langchain-mcp-adapters
-- FastMCP
-
-### Step 4: Verify Core Installation
+The repository root has no editable-install metadata. Run from the source checkout. `environment.yml` and `OHMind_ui/pyproject.toml` cover different dependency groups; creating the Conda environment alone does not complete the agent/UI setup. Confirm Poetry uses the environment you intend to run.
 
 ```bash
-# Test that core imports work
-python -c "
-import torch
-import rdkit
-from langchain_core.messages import HumanMessage
-from OHMind.OHVAE import JTPropVAE
-print('✓ All core dependencies loaded')
-print(f'  PyTorch: {torch.__version__}')
-print(f'  CUDA available: {torch.cuda.is_available()}')
-"
+python -c "import OHMind; print(OHMind.__version__)"
 ```
 
-## External Software Setup
+This checks the base package import only, not model availability or scientific correctness.
 
-### ORCA (Quantum Chemistry)
+## Configure private settings
 
-ORCA is required for QM calculations (geometry optimization, frequencies, etc.).
-
-#### Installation
-
-1. Register and download from [ORCA Forum](https://orcaforum.kofo.mpg.de/app.php/portal)
-2. Extract to a permanent location:
+For a new checkout, copy templates without overwriting existing configuration:
 
 ```bash
-# Example installation
-tar -xf orca_5_0_4_linux_x86-64_shared_openmpi411.tar.xz
-sudo mv orca_5_0_4_linux_x86-64_shared_openmpi411 /opt/orca
+cp -n .env.example .env
+cp -n OHMind_ui/.env.example OHMind_ui/.env
 ```
 
-3. Set environment variables:
+Set your LLM provider credentials, model, and endpoint in the root `.env`. Configure embeddings for literature retrieval. Set an absolute `OHMind_workspace` and external-tool paths for the workflows you use.
+
+Set independent `CHAINLIT_AUTH_SECRET`, `DEFAULT_ADMIN_PASSWORD`, `POSTGRES_PASSWORD`, and `MINIO_ROOT_PASSWORD` values in `OHMind_ui/.env`. Both files must be valid bash assignments because the combined launcher sources them, root first and UI second. Avoid empty UI variables overwriting a provider key from the root file. Real `.env` files and `users.json` stay local.
+
+Additional accounts can be created with `python OHMind_ui/manage_users.py add --username NAME`. The current account store uses plaintext passwords; keep it private. Sign in using the configured credentials.
+
+## Prepare PostgreSQL and MinIO
+
+For the web UI and the current migration chain:
 
 ```bash
-# Add to ~/.bashrc or .env
-export OHMind_ORCA=/opt/orca/orca
-export OHMind_MPI=/opt/orca  # MPI binaries location
-export PATH=$PATH:/opt/orca
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/orca
+docker compose -f OHMind_ui/docker-compose.yml up -d postgres minio
+docker compose -f OHMind_ui/docker-compose.yml ps
 ```
 
-#### Verification
+Wait for PostgreSQL to become healthy, then apply migrations:
 
 ```bash
-# Test ORCA installation
-$OHMind_ORCA --version
+cd OHMind_ui
+python -m alembic upgrade head
+cd ..
 ```
 
-### GROMACS (Molecular Dynamics)
+Use `docker-compose.yml`, whose PostgreSQL image includes **pgvector**. The older `docker-compose-db-only.yml` uses plain PostgreSQL and does not provide the extension required by the memory migration. Existing installations need a compatible database and an appropriate migration plan; changing the image does not migrate existing data.
 
-GROMACS is required for MD simulations.
+Alembic reads `POSTGRES_*` settings from the environment/UI `.env`, not `MEMORY_DATABASE_URL`. If memory uses a separate database, explicitly target that database when applying its migrations. See [Memory and persistence configuration]({% link configuration/memory-persistence.md %}).
 
-#### Installation via Conda
+## Model and scoring resources
+
+HEM optimization needs the following authorized resources in `OHMind/OHPSO/data/`:
+
+| Files | Purpose |
+|---|---|
+| `chembl_fps.npy` | Substructure scoring, loaded at module import |
+| `cation_latent_alkaline.npy`, `PairAlkaline.pt` | Alkaline stability |
+| `scalerEC.pkl`, `EffectConduc.pt` | Conductivity |
+| `scalerEWU.pkl`, `EffectWU.pt` | Water uptake |
+| `scalerESR.pkl`, `EffectSR.pt` | Swelling ratio |
+
+These files are not distributed in the inspected Git tree. Verified public download locations and checksums have not yet been provided. A new clone is therefore not a self-contained scientific installation. The tracked JT-VAE checkpoint and vocabularies do not replace these scoring resources. Consult the code repository's `docs/local-setup.md` for the resource inventory.
+
+## External software setup
+
+| Component | Used for | Configuration |
+|---|---|---|
+| ORCA and matching MPI | Quantum chemistry | `OHMind_ORCA`, `OHMind_MPI` |
+| GROMACS | Molecular dynamics | Make `gmx` available on `PATH` |
+| Multiwfn | Wavefunction analysis | `MULTIWFN_PATH` |
+| Qdrant and embeddings | Literature retrieval | `QDRANT_URL` or `QDRANT_PATH`, embedding provider settings |
+
+Obtain scientific executables from their maintainers and follow their installation and licensing instructions. Set absolute paths. Configure only workflows you intend to run; a working chat session does not verify these tools.
+
+## Start and verify
 
 ```bash
-# Easiest method - install via conda
-conda install -c conda-forge gromacs
+PYTHON="$(command -v python)" CHAINLIT="$(command -v chainlit)" bash start_OHMind.sh
 ```
 
-#### Installation from Source
-
-For better performance, compile from source:
+The launcher starts the backend, five MCP services, and Chainlit. Open `http://localhost:8000`. The backend normally uses `8005`; MCP services use `8101–8105`. Review `OHMind_logs/` for service-specific failures.
 
 ```bash
-# Download and extract
-wget https://ftp.gromacs.org/gromacs/gromacs-2023.3.tar.gz
-tar -xzf gromacs-2023.3.tar.gz
-cd gromacs-2023.3
-
-# Build with GPU support
-mkdir build && cd build
-cmake .. -DGMX_BUILD_OWN_FFTW=ON -DGMX_GPU=CUDA
-make -j$(nproc)
-sudo make install
-
-# Source the GROMACS environment
-source /usr/local/gromacs/bin/GMXRC
+curl --fail http://localhost:8005/health
 ```
 
-#### Verification
+A healthy backend response is a liveness check. Test the intended tools separately with a small workload before a long optimization or simulation.
 
-```bash
-gmx --version
-```
-
-### Multiwfn (Wavefunction Analysis)
-
-Multiwfn provides detailed electronic structure analysis.
-
-#### Installation
-
-1. Download from [Multiwfn website](http://sobereva.com/multiwfn/)
-2. Extract and set permissions:
-
-```bash
-tar -xf Multiwfn_3.8_dev_bin_Linux.tar.gz
-chmod +x Multiwfn_3.8_dev_bin_Linux/Multiwfn
-sudo mv Multiwfn_3.8_dev_bin_Linux /opt/multiwfn
-```
-
-3. Set environment variable:
-
-```bash
-export MULTIWFN_PATH=/opt/multiwfn/Multiwfn
-```
-
-#### Verification
-
-```bash
-$MULTIWFN_PATH <<< "q"
-```
-
-### Qdrant (Vector Database for RAG)
-
-Qdrant enables literature search functionality.
-
-#### Using Docker (Recommended)
-
-```bash
-docker run -p 6333:6333 -p 6334:6334 \
-  -v $(pwd)/qdrant_storage:/qdrant/storage:z \
-  qdrant/qdrant
-```
-
-#### Using Binary
-
-```bash
-# Download and run
-wget https://github.com/qdrant/qdrant/releases/download/v1.7.4/qdrant-x86_64-unknown-linux-gnu.tar.gz
-tar -xzf qdrant-x86_64-unknown-linux-gnu.tar.gz
-./qdrant
-```
-
-#### Configuration
-
-Set in `.env`:
-
-```bash
-QDRANT_URL=http://localhost:6333
-QDRANT_API_KEY=  # Optional, for secured instances
-```
-
-## Environment Configuration
-
-### Main Configuration File (.env)
-
-Create a `.env` file in the project root:
-
-```bash
-# ===========================================
-# OHMind Environment Configuration
-# ===========================================
-
-# --- LLM Configuration ---
-OPENAI_COMPATIBLE_API_KEY=your-api-key-here
-OPENAI_COMPATIBLE_BASE_URL=https://api.openai.com/v1
-OPENAI_COMPATIBLE_MODEL=gpt-4
-
-# --- Workspace Configuration ---
-OHMind_workspace=/path/to/workspace
-HEM_SAVE_PATH=${OHMind_workspace}/HEM
-QM_WORK_DIR=${OHMind_workspace}/QM
-MD_WORK_DIR=${OHMind_workspace}/MD
-MULTIWFN_WORK_DIR=${OHMind_workspace}/Multiwfn
-WORKSPACE_ROOT=${OHMind_workspace}
-
-# --- External Software Paths ---
-OHMind_ORCA=/opt/orca/orca
-OHMind_MPI=/opt/orca
-MULTIWFN_PATH=/opt/multiwfn/Multiwfn
-
-# --- MCP Configuration ---
-MCP_CONFIG_PATH=/path/to/OHMind/mcp.json
-
-# --- RAG Configuration ---
-QDRANT_URL=http://localhost:6333
-QDRANT_API_KEY=
-
-# --- Web Search ---
-TAVILY_API_KEY=your-tavily-key  # Optional, for web search
-```
-
-### MCP Configuration (mcp.json)
-
-The `mcp.json` file configures MCP server connections. A default configuration is provided in the project root.
-
-See [MCP Configuration](../configuration/mcp-config.md) for detailed configuration options.
-
-## Workspace Setup
-
-### Directory Structure
-
-OHMind uses a unified workspace for all computational outputs:
-
-```
-OHMind_workspace/
-├── HEM/        # PSO/HEMDesign optimization results
-├── QM/         # ORCA QM calculations
-├── MD/         # GROMACS MD simulations
-└── Multiwfn/   # Wavefunction analysis outputs
-```
-
-### Creating the Workspace
-
-```bash
-# Set workspace location
-export OHMind_workspace=/path/to/your/workspace
-
-# Create directory structure
-mkdir -p "$OHMind_workspace"/{HEM,QM,MD,Multiwfn}
-
-# Ensure proper permissions
-chmod -R u+rwx "$OHMind_workspace"
-```
-
-### Automatic Workspace Setup
-
-The `start_apps.sh` script automatically creates workspace directories if they don't exist:
-
-```bash
-# This will create workspace with default settings
-./start_apps.sh
-```
-
-## Verification
-
-### Complete Installation Check
-
-Run this comprehensive verification script:
-
-```bash
-#!/bin/bash
-echo "=== OHMind Installation Verification ==="
-
-# Check Conda environment
-echo -n "Conda environment: "
-if conda info --envs | grep -q "OHMind"; then
-    echo "✓ Found"
-else
-    echo "✗ Not found"
-fi
-
-# Check Python imports
-echo -n "Core Python imports: "
-python -c "from OHMind.OHVAE import JTPropVAE; from OHMind.OHPSO import BasePSOptimizer" 2>/dev/null && echo "✓ OK" || echo "✗ Failed"
-
-# Check ORCA
-echo -n "ORCA: "
-if [ -n "$OHMind_ORCA" ] && [ -x "$OHMind_ORCA" ]; then
-    echo "✓ Found at $OHMind_ORCA"
-else
-    echo "○ Not configured (optional)"
-fi
-
-# Check GROMACS
-echo -n "GROMACS: "
-if command -v gmx &> /dev/null; then
-    echo "✓ Found"
-else
-    echo "○ Not found (optional)"
-fi
-
-# Check Multiwfn
-echo -n "Multiwfn: "
-if [ -n "$MULTIWFN_PATH" ] && [ -x "$MULTIWFN_PATH" ]; then
-    echo "✓ Found at $MULTIWFN_PATH"
-else
-    echo "○ Not configured (optional)"
-fi
-
-# Check workspace
-echo -n "Workspace: "
-if [ -d "$OHMind_workspace" ] && [ -w "$OHMind_workspace" ]; then
-    echo "✓ Writable at $OHMind_workspace"
-else
-    echo "✗ Not configured or not writable"
-fi
-
-echo "=== Verification Complete ==="
-```
-
-### Test MCP Servers
-
-```bash
-# Test each MCP server
-python -m OHMind_agent.MCP.Chem.server --help
-python -m OHMind_agent.MCP.HEMDesign.server --help
-python -m OHMind_agent.MCP.ORCA.server --help
-python -m OHMind_agent.MCP.Multiwfn.server --help
-python -m OHMind_agent.MCP.GROMACS.server --help
-```
-
-## Platform-Specific Notes
-
-### Ubuntu/Debian
-
-```bash
-# Install system dependencies
-sudo apt-get update
-sudo apt-get install -y \
-    build-essential \
-    cmake \
-    libopenblas-dev \
-    libfftw3-dev \
-    libgsl-dev
-```
-
-### CentOS/RHEL
-
-```bash
-# Install system dependencies
-sudo yum groupinstall -y "Development Tools"
-sudo yum install -y \
-    cmake \
-    openblas-devel \
-    fftw-devel \
-    gsl-devel
-```
-
-### GPU Setup (NVIDIA)
-
-Ensure CUDA is properly installed:
-
-```bash
-# Check CUDA version
-nvcc --version
-
-# Verify PyTorch can see GPU
-python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
-```
-
-### Running Without GPU
-
-OHMind can run without a GPU, but VAE model inference will be slower:
-
-```bash
-# Force CPU mode in PyTorch
-export CUDA_VISIBLE_DEVICES=""
-```
-
-## Troubleshooting Installation
-
-### Common Issues
-
-| Issue | Solution |
-|-------|----------|
-| Conda environment creation fails | Try `conda clean --all` then retry |
-| CUDA not detected | Verify NVIDIA drivers and CUDA toolkit |
-| RDKit import error | Reinstall: `conda install -c conda-forge rdkit` |
-| Permission denied on workspace | Check directory ownership and permissions |
-
-For more troubleshooting help, see [Troubleshooting Guide](../troubleshooting/index.md).
-
-## See Also
-
-- [Quick Start Guide](./quick-start.md) - Fast-track installation
-- [First Steps](./first-steps.md) - Your first interaction with OHMind
-- [Environment Variables](../configuration/environment-variables.md) - All configuration options
-- [Troubleshooting](../troubleshooting/installation-issues.md) - Installation issues
-
----
-
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+For terminal usage, `PYTHON="$(command -v python)" bash start_OHMind_full.sh` starts MCP services and the CLI. Use `start_OHMind_cli.sh` when MCP services are already running. Explicit interpreter overrides avoid developer-machine defaults in the launchers.

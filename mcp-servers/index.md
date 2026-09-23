@@ -1,4 +1,5 @@
 ---
+permalink: /mcp-servers/
 title: "MCP Server Reference"
 description: "Overview of OHMind's Model Context Protocol servers and tool distribution"
 category: "mcp-servers"
@@ -29,11 +30,11 @@ OHMind uses the Model Context Protocol (MCP) to provide domain-specific tools to
 
 | Server | Purpose | Tool Count |
 |--------|---------|------------|
-| [OHMind-Chem](./chem-server.md) | Molecular informatics & web search | 17 |
-| [OHMind-HEMDesign](./hem-server.md) | PSO optimization & job management | 7 |
-| [OHMind-ORCA](./orca-server.md) | Quantum chemistry calculations | 10 |
-| [OHMind-Multiwfn](./multiwfn-server.md) | Wavefunction analysis | 16 |
-| [OHMind-GROMACS](./gromacs-server.md) | Molecular dynamics simulations | 25+ |
+| [OHMind-Chem]({% link mcp-servers/chem-server.md %}) | Molecular informatics & web search | 17 |
+| [OHMind-HEMDesign]({% link mcp-servers/hem-server.md %}) | PSO optimization & job management | 7 |
+| [OHMind-ORCA]({% link mcp-servers/orca-server.md %}) | Quantum chemistry calculations | 10 |
+| [OHMind-Multiwfn]({% link mcp-servers/multiwfn-server.md %}) | Wavefunction analysis | 16 |
+| [OHMind-GROMACS]({% link mcp-servers/gromacs-server.md %}) | Molecular dynamics simulations | 25+ |
 
 ### Key Features
 
@@ -114,7 +115,7 @@ Molecular informatics and cheminformatics operations.
 - Structure visualization
 - Chemistry-aware web search (Tavily)
 
-[Full Documentation →](./chem-server.md)
+[Full Documentation →]({% link mcp-servers/chem-server.md %})
 
 ### OHMind-HEMDesign
 
@@ -129,7 +130,7 @@ HEM optimization and PSO-based cation design.
 - Check optimization results
 - Monitor and manage running jobs
 
-[Full Documentation →](./hem-server.md)
+[Full Documentation →]({% link mcp-servers/hem-server.md %})
 
 ### OHMind-ORCA
 
@@ -146,7 +147,7 @@ Quantum chemistry calculations via ORCA.
 - Binding energy calculations
 - Charge analysis
 
-[Full Documentation →](./orca-server.md)
+[Full Documentation →]({% link mcp-servers/orca-server.md %})
 
 ### OHMind-Multiwfn
 
@@ -162,7 +163,7 @@ Wavefunction and electronic structure analysis.
 - Orbital visualization (2D/3D)
 - Spectrum simulation
 
-[Full Documentation →](./multiwfn-server.md)
+[Full Documentation →]({% link mcp-servers/multiwfn-server.md %})
 
 ### OHMind-GROMACS
 
@@ -178,7 +179,7 @@ Molecular dynamics simulations for IEMs.
 - Trajectory and energy analysis
 - Complete IEM workflow automation
 
-[Full Documentation →](./gromacs-server.md)
+[Full Documentation →]({% link mcp-servers/gromacs-server.md %})
 
 ## Transport Modes
 
@@ -379,10 +380,10 @@ tail -f OHMind_logs/chem_mcp.log
 
 ## See Also
 
-- [Architecture Overview](../architecture/overview.md) - System architecture
-- [MCP Integration](../architecture/mcp-integration.md) - Protocol details
-- [Configuration Reference](../configuration/mcp-config.md) - Full configuration guide
-- [Agent Reference](../agents/index.md) - Agent-tool mapping
+- [Architecture Overview]({% link architecture/overview.md %}) - System architecture
+- [MCP Integration]({% link architecture/mcp-integration.md %}) - Protocol details
+- [Configuration Reference]({% link configuration/mcp-config.md %}) - Full configuration guide
+- [Agent Reference]({% link agents/index.md %}) - Agent-tool mapping
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

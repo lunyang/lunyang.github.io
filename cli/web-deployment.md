@@ -1,4 +1,5 @@
 ---
+permalink: /cli/web-deployment/
 title: "Web Deployment"
 description: "Deploy OHMind CLI as a web application using textual-serve"
 category: "cli"
@@ -302,23 +303,13 @@ sudo systemctl start ohmind-web
 
 ### Using Docker
 
-```dockerfile
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY . .
-RUN pip install -e .
-
-EXPOSE 8000
-
-CMD ["python", "-m", "OHMind_cli", "deploy", "--host", "0.0.0.0", "--port", "8000"]
-```
+A source checkout requires the scientific Conda environment and UI/agent dependencies. The repository root has no editable-install metadata, so a generic Python image with an editable install does not build OHMind. Follow [Installation]({% link getting-started/installation.md %}) and validate any custom container with the models and external tools it will run. No complete, verified CLI Docker image is provided here.
 
 ## See Also
 
-- [CLI Overview](./index.md) - Getting started with the CLI
-- [Configuration](../configuration/index.md) - Environment configuration
-- [Troubleshooting](../troubleshooting/index.md) - Common issues
+- [CLI Overview]({% link cli/index.md %}) - Getting started with the CLI
+- [Configuration]({% link configuration/index.md %}) - Environment configuration
+- [Troubleshooting]({% link troubleshooting/index.md %}) - Common issues
 
 ---
 

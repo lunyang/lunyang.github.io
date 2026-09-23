@@ -1,4 +1,5 @@
 ---
+permalink: /tutorials/literature-search/
 title: "Literature Search Tutorial"
 description: "Step-by-step guide to searching scientific literature using OHMind's RAG system"
 category: "tutorials"
@@ -602,10 +603,10 @@ to verify the predicted LUMO energy and stability.
 
 ## See Also
 
-- [RAG Agent](../agents/rag-agent.md) - Agent capabilities
-- [Web Search Agent](../agents/web-search-agent.md) - Web search features
-- [HEM Optimization](./hem-optimization.md) - Apply literature insights
-- [Multi-Step Workflows](./multi-step-workflows.md) - Complex research pipelines
+- [RAG Agent]({% link agents/rag-agent.md %}) - Agent capabilities
+- [Web Search Agent]({% link agents/web-search-agent.md %}) - Web search features
+- [HEM Optimization]({% link tutorials/hem-optimization.md %}) - Apply literature insights
+- [Multi-Step Workflows]({% link tutorials/multi-step-workflows.md %}) - Complex research pipelines
 
 ---
 

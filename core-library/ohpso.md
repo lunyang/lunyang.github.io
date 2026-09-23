@@ -1,9 +1,10 @@
 ---
+permalink: /core-library/ohpso/
 title: "OHPSO Module"
 description: "Particle Swarm Optimization for molecular design in latent space"
 category: "core-library"
 tags: ["pso", "optimization", "molecular-design", "scoring"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Core Library Reference
 nav_order: 2
@@ -679,11 +680,14 @@ def run(self, num_steps, num_track=10):
 
 ## See Also
 
-- [Core Library Index](./index.md) - Module overview
-- [OHVAE Module](./ohvae.md) - VAE for molecular generation
-- [OHScore Module](./ohscore.md) - Additional metrics
-- [HEM Agent](../agents/hem-agent.md) - Agent using OHPSO
-- [HEM Server](../mcp-servers/hem-server.md) - MCP server tools
+- [Core Library Index]({% link core-library/index.md %}) - Module overview
+- [OHVAE Module]({% link core-library/ohvae.md %}) - VAE for molecular generation
+- [OHScore Module]({% link core-library/ohscore.md %}) - Additional metrics
+- [HEM Agent]({% link agents/hem-agent.md %}) - Agent using OHPSO
+- [HEM Server]({% link mcp-servers/hem-server.md %}) - MCP server tools
 
 ---
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+
+## Optimizer checkpoints and recovery
+
+`BasePSOptimizer.save_checkpoint(path, metadata=...)` saves optimizer/swarm state and provenance. `BasePSOptimizer.from_checkpoint(path, inference_model=..., scoring_functions=...)` verifies and reloads saved state; it does not bundle the model or scoring resources. The HEM core validates saved configuration before continuing to the total target iteration count. See [Resume PSO]({% link tutorials/pso-resume.md %}) and [Recovery APIs]({% link api/memory-recovery.md %}).

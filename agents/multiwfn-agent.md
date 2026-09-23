@@ -1,4 +1,5 @@
 ---
+permalink: /agents/multiwfn-agent/
 title: "Multiwfn Agent"
 description: "Specialized agent for wavefunction and electronic structure analysis"
 category: "agents"
@@ -372,10 +373,10 @@ Cube files can be visualized with external tools:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [QM Agent](./qm-agent.md) - For running calculations
-- [Multiwfn MCP Server](../mcp-servers/multiwfn-server.md) - Tool documentation
-- [QM Calculations Tutorial](../tutorials/qm-calculations.md) - Step-by-step guide
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [QM Agent]({% link agents/qm-agent.md %}) - For running calculations
+- [Multiwfn MCP Server]({% link mcp-servers/multiwfn-server.md %}) - Tool documentation
+- [QM Calculations Tutorial]({% link tutorials/qm-calculations.md %}) - Step-by-step guide
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

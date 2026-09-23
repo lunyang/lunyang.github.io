@@ -1,9 +1,10 @@
 ---
+permalink: /getting-started/first-steps/
 title: "First Steps"
 description: "Your first interaction with OHMind - basic workflows and examples"
 category: "getting-started"
 tags: ["tutorial", "first-steps", "workflow", "examples"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Getting Started
 nav_order: 3
@@ -31,8 +32,8 @@ OHMind provides three ways to interact with the system:
 
 | Interface | Best For | Start Command |
 |-----------|----------|---------------|
-| **CLI (TUI)** | Terminal users, quick queries, file preview | `./start_OHMind_cli.sh` |
-| **Web UI** | Browser-based access, visual workflows | `./start_apps.sh` |
+| **CLI (TUI)** | Terminal users, quick queries, file preview | `PYTHON="$(command -v python)" bash start_OHMind_full.sh` |
+| **Web UI** | Browser-based access, visual workflows | `./start_OHMind.sh` |
 | **API** | Programmatic integration, automation | Direct HTTP calls |
 
 ### CLI Features
@@ -58,11 +59,11 @@ The Chainlit-based web interface offers:
 
 ```bash
 cd OHMind
-./start_OHMind_cli.sh
+PYTHON="$(command -v python)" bash start_OHMind_full.sh
 ```
 
 The CLI will:
-1. Activate the OHMind conda environment
+1. Use the already activated OHMind environment
 2. Set up environment variables
 3. Connect to MCP servers
 4. Display the interactive chat interface
@@ -71,20 +72,20 @@ The CLI will:
 
 ```bash
 cd OHMind
-./start_apps.sh
+./start_OHMind.sh
 ```
 
 Then open `http://localhost:8000` in your browser.
 
-Default credentials:
-- Username: `admin`
-- Password: `admin`
+Sign in with the `DEFAULT_ADMIN_USER` and `DEFAULT_ADMIN_PASSWORD` configured in your private UI `.env`.
 
 ### Option 3: Backend Only (for API Access)
 
+Load the required environment settings and start MCP/database services first. The combined launcher is the simplest complete setup.
+
 ```bash
 cd OHMind
-uvicorn app:app --host 0.0.0.0 --port 8005
+python -m uvicorn OHMind_backend:app --host 127.0.0.1 --port 8005
 ```
 
 ## Your First Conversation
@@ -321,19 +322,19 @@ Now that you're familiar with basic interactions, explore these topics:
 
 | Goal | Resource |
 |------|----------|
-| Run HEM optimization | [HEM Optimization Tutorial](../tutorials/hem-optimization.md) |
-| Perform QM calculations | [QM Calculations Tutorial](../tutorials/qm-calculations.md) |
-| Understand the architecture | [Architecture Overview](../architecture/overview.md) |
-| Learn about agents | [Agent Reference](../agents/index.md) |
-| Configure the system | [Configuration Guide](../configuration/index.md) |
+| Run HEM optimization | [HEM Optimization Tutorial]({% link tutorials/hem-optimization.md %}) |
+| Perform QM calculations | [QM Calculations Tutorial]({% link tutorials/qm-calculations.md %}) |
+| Understand the architecture | [Architecture Overview]({% link architecture/overview.md %}) |
+| Learn about agents | [Agent Reference]({% link agents/index.md %}) |
+| Configure the system | [Configuration Guide]({% link configuration/index.md %}) |
 
 ## See Also
 
-- [Quick Start Guide](./quick-start.md) - Installation overview
-- [Installation Guide](./installation.md) - Detailed setup instructions
-- [CLI Documentation](../cli/index.md) - Full CLI reference
-- [Tutorials](../tutorials/index.md) - Step-by-step guides
+- [Quick Start Guide]({% link getting-started/quick-start.md %}) - Installation overview
+- [Installation Guide]({% link getting-started/installation.md %}) - Detailed setup instructions
+- [CLI Documentation]({% link cli/index.md %}) - Full CLI reference
+- [Tutorials]({% link tutorials/index.md %}) - Step-by-step guides
 
 ---
 
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+*Updated for the source snapshot described in [Documentation status](/release-notes/).*

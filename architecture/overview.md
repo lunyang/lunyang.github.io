@@ -1,9 +1,10 @@
 ---
+permalink: /architecture/overview/
 title: "System Architecture Overview"
 description: "High-level architecture of the OHMind multi-agent framework for HEM discovery"
 category: "architecture"
 tags: ["architecture", "system-design", "components", "data-flow"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Architecture
 nav_order: 1
@@ -285,11 +286,13 @@ The Supervisor agent coordinates multi-agent workflows:
 
 ## See Also
 
-- [Multi-Agent System](./multi-agent-system.md) - Detailed agent architecture
-- [State Management](./state-management.md) - AgentState and data flow
-- [MCP Integration](./mcp-integration.md) - MCP protocol details
-- [Configuration Overview](../configuration/index.md) - System configuration
+- [Multi-Agent System]({% link architecture/multi-agent-system.md %}) - Detailed agent architecture
+- [State Management]({% link architecture/state-management.md %}) - AgentState and data flow
+- [MCP Integration]({% link architecture/mcp-integration.md %}) - MCP protocol details
+- [Configuration Overview]({% link configuration/index.md %}) - System configuration
 
 ---
 
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+## Durable state and verified recovery
+
+The backend now shares a workflow/checkpointer across requests. PostgreSQL persistence is optional; process-local checkpoints remain the default. Recovery memory uses a separate authoritative episode ledger and Store index. Read [State Management]({% link architecture/state-management.md %}), [Recovery Memory]({% link architecture/memory.md %}), and [Recovery and Policies]({% link architecture/recovery.md %}) for the current execution boundaries.

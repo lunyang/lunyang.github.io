@@ -1,9 +1,10 @@
 ---
+permalink: /configuration/
 title: "Configuration Overview"
 description: "Complete guide to configuring OHMind environment variables, MCP servers, LLM providers, and workspace settings"
 category: "configuration"
 tags: ["configuration", "environment", "setup", "mcp", "llm"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 nav_order: 4
 has_children: true
@@ -114,7 +115,7 @@ Core settings loaded from `.env` files:
 - **External Services**: Tavily, HuggingFace tokens
 - **Server Settings**: Host, port, CORS origins
 
-→ See [Environment Variables](./environment-variables.md) for complete reference.
+→ See [Environment Variables]({% link configuration/environment-variables.md %}) for complete reference.
 
 ### 2. MCP Server Configuration
 
@@ -125,7 +126,7 @@ JSON-based configuration for Model Context Protocol servers:
 - **Timeout Settings**: Per-server timeout configuration
 - **Enable/Disable**: Individual server control
 
-→ See [MCP Configuration](./mcp-config.md) for format and examples.
+→ See [MCP Configuration]({% link configuration/mcp-config.md %}) for format and examples.
 
 ### 3. LLM Provider Setup
 
@@ -135,7 +136,7 @@ Support for multiple LLM providers:
 - **OpenAI Direct**: Standard OpenAI API
 - **OpenAI-Compatible**: OpenRouter, Together, Groq, local models
 
-→ See [LLM Providers](./llm-providers.md) for setup instructions.
+→ See [LLM Providers]({% link configuration/llm-providers.md %}) for setup instructions.
 
 ### 4. Workspace Setup
 
@@ -146,7 +147,7 @@ Unified workspace organization:
 - **Permissions**: Required access rights
 - **Storage Requirements**: Disk space considerations
 
-→ See [Workspace Setup](./workspace-setup.md) for detailed guide.
+→ See [Workspace Setup]({% link configuration/workspace-setup.md %}) for detailed guide.
 
 ## Configuration Loading
 
@@ -193,42 +194,16 @@ class Settings(BaseSettings):
 
 ## Startup Scripts
 
-OHMind provides helper scripts that set up configuration automatically:
+Activate the intended environment first. The combined launchers load the root `.env` followed by the UI `.env`; later values can override earlier ones.
 
-### `start_apps.sh` (Web UI)
+| Script | Purpose |
+|---|---|
+| `start_OHMind.sh` | MCP services, backend, and web UI |
+| `start_OHMind_full.sh` | MCP services and terminal CLI |
+| `start_OHMind_cli.sh` | CLI when MCP services are already running |
 
-```bash
-./start_apps.sh
-```
+Use `PYTHON="$(command -v python)"` before the command to avoid developer-machine interpreter defaults, and `CHAINLIT="$(command -v chainlit)"` for the web launcher. See [Installation]({% link getting-started/installation.md %}) for complete examples.
 
-This script:
-- Exports `PYTHONPATH` to the project root
-- Loads environment from `OHMind_ui/.env`
-- Sets workspace paths with sensible defaults
-- Starts FastAPI backend and Chainlit UI
-
-### `start_OHMind_cli.sh` (Terminal UI)
-
-```bash
-./start_OHMind_cli.sh
-```
-
-This script:
-- Activates the OHMind conda environment
-- Sets `PYTHONPATH` to the project root
-- Exports workspace environment variables
-- Launches the Textual-based CLI
-
-### `start_OHMind.sh` (HTTP MCP Servers)
-
-```bash
-./start_OHMind.sh
-```
-
-This script:
-- Starts HTTP (streamable-http) MCP servers
-- Exposes servers on ports 8101-8105
-- Suitable for IDE plugins and external MCP clients
 
 ## Validation
 
@@ -256,12 +231,14 @@ ls -la $OHMind_workspace
 
 ## See Also
 
-- [Environment Variables](./environment-variables.md) - Complete variable reference
-- [MCP Configuration](./mcp-config.md) - MCP server setup
-- [LLM Providers](./llm-providers.md) - Provider-specific configuration
-- [Workspace Setup](./workspace-setup.md) - Directory structure and storage
-- [Troubleshooting](../troubleshooting/index.md) - Common configuration issues
+- [Environment Variables]({% link configuration/environment-variables.md %}) - Complete variable reference
+- [MCP Configuration]({% link configuration/mcp-config.md %}) - MCP server setup
+- [LLM Providers]({% link configuration/llm-providers.md %}) - Provider-specific configuration
+- [Workspace Setup]({% link configuration/workspace-setup.md %}) - Directory structure and storage
+- [Troubleshooting]({% link troubleshooting/index.md %}) - Common configuration issues
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v1.0.0*
+## Durable state and recovery memory
+
+See [Memory and Persistence]({% link configuration/memory-persistence.md %}) for database preparation, default values, read/write modes, and current integration limits.

@@ -1,4 +1,5 @@
 ---
+permalink: /cli/commands/
 title: "CLI Commands"
 description: "Complete reference for OHMind CLI slash commands"
 category: "cli"
@@ -257,9 +258,9 @@ What backbones are available for HEM design?
 
 ## See Also
 
-- [CLI Overview](./index.md) - Getting started with the CLI
-- [Keyboard Shortcuts](./keyboard-shortcuts.md) - Keyboard-based navigation
-- [Workspace Sidebar](./workspace-sidebar.md) - File browser features
+- [CLI Overview]({% link cli/index.md %}) - Getting started with the CLI
+- [Keyboard Shortcuts]({% link cli/keyboard-shortcuts.md %}) - Keyboard-based navigation
+- [Workspace Sidebar]({% link cli/workspace-sidebar.md %}) - File browser features
 
 ---
 

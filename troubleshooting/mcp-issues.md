@@ -1,4 +1,5 @@
 ---
+permalink: /troubleshooting/mcp-issues/
 title: MCP Server Issues
 description: "Solutions for MCP server connection, transport, and tool execution problems"
 parent: Troubleshooting
@@ -552,11 +553,11 @@ echo "=== Check Complete ==="
 
 ## See Also
 
-- [Troubleshooting Overview](./index.md) - Main troubleshooting guide
-- [Installation Issues](./installation-issues.md) - Setup problems
-- [MCP Integration](../architecture/mcp-integration.md) - MCP architecture
-- [MCP Servers Reference](../mcp-servers/index.md) - Server documentation
-- [Session Manager API](../api/session-manager.md) - Session management
+- [Troubleshooting Overview]({% link troubleshooting/index.md %}) - Main troubleshooting guide
+- [Installation Issues]({% link troubleshooting/installation-issues.md %}) - Setup problems
+- [MCP Integration]({% link architecture/mcp-integration.md %}) - MCP architecture
+- [MCP Servers Reference]({% link mcp-servers/index.md %}) - Server documentation
+- [Session Manager API]({% link api/session-manager.md %}) - Session management
 
 ---
 

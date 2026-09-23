@@ -1,9 +1,10 @@
 ---
+permalink: /architecture/multi-agent-system/
 title: "Multi-Agent System Architecture"
 description: "Detailed documentation of the LangGraph-based multi-agent system in OHMind"
 category: "architecture"
 tags: ["agents", "langgraph", "supervisor", "routing", "workflow"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Architecture
 nav_order: 2
@@ -71,7 +72,7 @@ graph TD
 | **StateGraph** | LangGraph graph managing conversation flow |
 | **Entry Point** | Supervisor agent receives all initial requests |
 | **Conditional Edges** | Dynamic routing based on `route_after_agent()` function |
-| **Checkpointing** | MemorySaver for state persistence |
+| **Checkpointing** | Process-local MemorySaver by default; optional PostgreSQL checkpoints |
 
 ## Specialized Agents
 
@@ -336,41 +337,11 @@ Calculate HOMO/LUMO energies and analyze orbital distribution for this cation.
 
 ### Workflow Creation
 
-The workflow is created using LangGraph's `StateGraph`:
-
-```python
-from langgraph.graph import StateGraph, END
-from langgraph.checkpoint.memory import MemorySaver
-
-def create_workflow(llm_config, mcp_clients, retriever, session_manager):
-    workflow = StateGraph(AgentState)
-    
-    # Add nodes
-    workflow.add_node("supervisor", supervisor)
-    workflow.add_node("hem_agent", hem_agent)
-    # ... other agents
-    
-    # Set entry point
-    workflow.set_entry_point("supervisor")
-    
-    # Add conditional edges
-    workflow.add_conditional_edges(
-        "supervisor",
-        route_after_agent,
-        {"hem_agent": "hem_agent", "__end__": END, ...}
-    )
-    
-    # Compile with checkpointing
-    memory = MemorySaver()
-    return workflow.compile(checkpointer=memory)
-```
+The factory accepts a shared checkpointer, Store, memory gateway, and memory configuration in addition to the model and MCP session manager. See [Workflow API]({% link api/workflow-api.md %}) for an integration example that initializes and closes those resources correctly.
 
 ### State Persistence
 
-LangGraph's `MemorySaver` provides checkpointing for:
-- Conversation history persistence
-- Task plan state recovery
-- Multi-turn conversation support
+`MemorySaver` supports multi-turn state only within one process. `DURABLE_STATE_ENABLED=true` selects a PostgreSQL saver in the standard backend after database configuration. Direct factory callers must pass a durable saver themselves. The backend shares the compiled graph across requests; use a stable thread ID. See [State Management]({% link architecture/state-management.md %}) for restart limitations.
 
 ### Streaming Support
 
@@ -385,11 +356,13 @@ async for chunk in streaming_llm.astream(messages, config=config):
 
 ## See Also
 
-- [System Overview](./overview.md) - High-level architecture
-- [State Management](./state-management.md) - AgentState details
-- [MCP Integration](./mcp-integration.md) - MCP server communication
-- [Agent Reference](../agents/index.md) - Detailed agent documentation
+- [System Overview]({% link architecture/overview.md %}) - High-level architecture
+- [State Management]({% link architecture/state-management.md %}) - AgentState details
+- [MCP Integration]({% link architecture/mcp-integration.md %}) - MCP server communication
+- [Agent Reference]({% link agents/index.md %}) - Detailed agent documentation
 
 ---
 
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+## Current recovery route
+
+Eligible agent errors pass through classification, verified recall, action selection, outcome validation, and escalation. The general validator does not count selection as successful execution. PSO has a separate tool-specific retry controller. The examples above illustrate the core agent flow; see [Recovery and Policies]({% link architecture/recovery.md %}) for the complete current failure route.

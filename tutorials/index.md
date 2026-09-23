@@ -1,9 +1,10 @@
 ---
+permalink: /tutorials/
 title: "Tutorials"
 description: "Step-by-step tutorials for common OHMind workflows including HEM optimization, QM calculations, MD simulations, and literature search"
 category: "tutorials"
 tags: ["tutorials", "guides", "workflows", "examples"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 nav_order: 9
 has_children: true
@@ -38,10 +39,10 @@ Before starting any tutorial, ensure you have:
 
 ### System Requirements
 
-- [ ] OHMind installed and configured ([Installation Guide](../getting-started/installation.md))
+- [ ] OHMind installed and configured ([Installation Guide]({% link getting-started/installation.md %}))
 - [ ] Conda environment activated (`conda activate OHMind`)
-- [ ] Workspace directory set up ([Workspace Setup](../configuration/workspace-setup.md))
-- [ ] LLM provider configured ([LLM Providers](../configuration/llm-providers.md))
+- [ ] Workspace directory set up ([Workspace Setup]({% link configuration/workspace-setup.md %}))
+- [ ] LLM provider configured ([LLM Providers]({% link configuration/llm-providers.md %}))
 
 ### For Specific Tutorials
 
@@ -66,7 +67,7 @@ cd OHMind
 **Web UI:**
 ```bash
 cd OHMind
-./start_apps.sh
+./start_OHMind.sh
 # Open http://localhost:8000
 ```
 
@@ -76,21 +77,21 @@ cd OHMind
 
 | Tutorial | Time | Description |
 |----------|------|-------------|
-| [HEM Optimization](./hem-optimization.md) | 30 min | Design new cations using PSO optimization |
-| [Literature Search](./literature-search.md) | 15 min | Search scientific literature with RAG |
+| [HEM Optimization]({% link tutorials/hem-optimization.md %}) | 30 min | Design new cations using PSO optimization |
+| [Literature Search]({% link tutorials/literature-search.md %}) | 15 min | Search scientific literature with RAG |
 
 ### Intermediate Tutorials
 
 | Tutorial | Time | Description |
 |----------|------|-------------|
-| [QM Calculations](./qm-calculations.md) | 45 min | Run quantum chemistry calculations with ORCA |
-| [MD Simulations](./md-simulations.md) | 60 min | Perform molecular dynamics with GROMACS |
+| [QM Calculations]({% link tutorials/qm-calculations.md %}) | 45 min | Run quantum chemistry calculations with ORCA |
+| [MD Simulations]({% link tutorials/md-simulations.md %}) | 60 min | Perform molecular dynamics with GROMACS |
 
 ### Advanced Tutorials
 
 | Tutorial | Time | Description |
 |----------|------|-------------|
-| [Multi-Step Workflows](./multi-step-workflows.md) | 90 min | Combine multiple agents for complex tasks |
+| [Multi-Step Workflows]({% link tutorials/multi-step-workflows.md %}) | 90 min | Combine multiple agents for complex tasks |
 
 ## Difficulty Levels
 
@@ -101,7 +102,7 @@ cd OHMind
 - Quick results (< 30 minutes)
 - Minimal configuration
 
-**Recommended starting point:** [HEM Optimization](./hem-optimization.md)
+**Recommended starting point:** [HEM Optimization]({% link tutorials/hem-optimization.md %})
 
 ### 🟡 Intermediate
 
@@ -110,7 +111,7 @@ cd OHMind
 - Moderate computation time
 - Some configuration needed
 
-**Recommended:** [QM Calculations](./qm-calculations.md)
+**Recommended:** [QM Calculations]({% link tutorials/qm-calculations.md %})
 
 ### 🔴 Advanced
 
@@ -119,7 +120,7 @@ cd OHMind
 - Complex workflows
 - Full system configuration
 
-**Recommended:** [Multi-Step Workflows](./multi-step-workflows.md)
+**Recommended:** [Multi-Step Workflows]({% link tutorials/multi-step-workflows.md %})
 
 ## Tutorial Workflow
 
@@ -207,7 +208,7 @@ If you encounter issues:
 1. **Check prerequisites** - Ensure all requirements are met
 2. **Review error messages** - Agent responses include diagnostic info
 3. **Check workspace** - Verify files are being created
-4. **Consult troubleshooting** - See [Troubleshooting Guide](../troubleshooting/index.md)
+4. **Consult troubleshooting** - See [Troubleshooting Guide]({% link troubleshooting/index.md %})
 
 ### Common Issues
 
@@ -220,17 +221,20 @@ If you encounter issues:
 
 ### Getting Support
 
-- Check the [Troubleshooting Guide](../troubleshooting/index.md)
-- Review [Configuration](../configuration/index.md) settings
-- Consult [Agent Reference](../agents/index.md) for capabilities
+- Check the [Troubleshooting Guide]({% link troubleshooting/index.md %})
+- Review [Configuration]({% link configuration/index.md %}) settings
+- Consult [Agent Reference]({% link agents/index.md %}) for capabilities
 
 ## See Also
 
-- [Getting Started](../getting-started/quick-start.md) - Initial setup
-- [Agent Reference](../agents/index.md) - Agent capabilities
-- [MCP Servers](../mcp-servers/index.md) - Available tools
-- [Configuration](../configuration/index.md) - System configuration
+- [Getting Started]({% link getting-started/quick-start.md %}) - Initial setup
+- [Agent Reference]({% link agents/index.md %}) - Agent capabilities
+- [MCP Servers]({% link mcp-servers/index.md %}) - Available tools
+- [Configuration]({% link configuration/index.md %}) - System configuration
 
 ---
 
-*Last updated: 2025-12-23 | OHMind v1.0.0*
+## Persistence and recovery tutorials
+
+- [Verify Persistence and Memory]({% link tutorials/memory-and-recovery.md %}): retain thread IDs, check restart behavior, and understand shadow mode.
+- [Resume PSO Optimization]({% link tutorials/pso-resume.md %}): inspect job artifacts and resume to a target iteration.

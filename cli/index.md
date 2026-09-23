@@ -1,4 +1,5 @@
 ---
+permalink: /cli/
 title: "CLI Application"
 description: "OHMind Terminal User Interface (TUI) - Interactive chat interface for HEM design"
 category: "cli"
@@ -163,11 +164,11 @@ python -m OHMind_cli deploy --host 0.0.0.0 --port 8000
 
 ## See Also
 
-- [Commands Reference](./commands.md) - Complete slash command documentation
-- [Keyboard Shortcuts](./keyboard-shortcuts.md) - All keyboard shortcuts
-- [Workspace Sidebar](./workspace-sidebar.md) - File browser and preview
-- [Themes](./themes.md) - Theme customization
-- [Web Deployment](./web-deployment.md) - Deploy as web application
+- [Commands Reference]({% link cli/commands.md %}) - Complete slash command documentation
+- [Keyboard Shortcuts]({% link cli/keyboard-shortcuts.md %}) - All keyboard shortcuts
+- [Workspace Sidebar]({% link cli/workspace-sidebar.md %}) - File browser and preview
+- [Themes]({% link cli/themes.md %}) - Theme customization
+- [Web Deployment]({% link cli/web-deployment.md %}) - Deploy as web application
 
 ---
 

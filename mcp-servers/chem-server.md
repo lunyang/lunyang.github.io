@@ -1,4 +1,5 @@
 ---
+permalink: /mcp-servers/chem-server/
 title: "OHMind-Chem MCP Server"
 description: "Chemistry MCP server for molecular informatics and web search"
 category: "mcp-servers"
@@ -412,9 +413,9 @@ PYTHONPATH=/path/to/OHMind \
 
 ## See Also
 
-- [MCP Server Reference](./index.md) - Overview of all servers
-- [Chemistry Agent](../agents/chemistry-agent.md) - Agent documentation
-- [Configuration Reference](../configuration/mcp-config.md) - Full configuration
+- [MCP Server Reference]({% link mcp-servers/index.md %}) - Overview of all servers
+- [Chemistry Agent]({% link agents/chemistry-agent.md %}) - Agent documentation
+- [Configuration Reference]({% link configuration/mcp-config.md %}) - Full configuration
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

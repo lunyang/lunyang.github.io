@@ -1,4 +1,5 @@
 ---
+permalink: /troubleshooting/installation-issues/
 title: Installation Issues
 description: "Solutions for common installation and environment setup problems"
 parent: Troubleshooting
@@ -355,11 +356,13 @@ ModuleNotFoundError: No module named 'OHMind'
    PYTHONPATH=/path/to/OHMind
    ```
 
-3. **Install in development mode:**
+3. **Run from the source root with the correct environment:**
    ```bash
    cd /path/to/OHMind
-   pip install -e .
+   conda activate OHMind
+   python -c "import OHMind; print(OHMind.__version__)"
    ```
+   The root has no editable-install metadata. Follow [Installation]({% link getting-started/installation.md %}) for Conda and Poetry dependency setup.
 
 ### Wrong Python Interpreter
 
@@ -547,10 +550,10 @@ echo "=== Verification Complete ==="
 
 ## See Also
 
-- [Troubleshooting Overview](./index.md) - Main troubleshooting guide
-- [MCP Issues](./mcp-issues.md) - Server connection problems
-- [Quick Start Guide](../getting-started/quick-start.md) - Initial setup
-- [Installation Guide](../getting-started/installation.md) - Detailed installation
+- [Troubleshooting Overview]({% link troubleshooting/index.md %}) - Main troubleshooting guide
+- [MCP Issues]({% link troubleshooting/mcp-issues.md %}) - Server connection problems
+- [Quick Start Guide]({% link getting-started/quick-start.md %}) - Initial setup
+- [Installation Guide]({% link getting-started/installation.md %}) - Detailed installation
 
 ---
 

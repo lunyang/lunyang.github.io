@@ -1,6 +1,6 @@
 title: OHMind Documentation
 description: Documentation for the OHMind platform
-remote_theme: just-the-docs/just-the-docs
+remote_theme: just-the-docs/just-the-docs@v0.10.1
 markdown: kramdown
 permalink: pretty
 
@@ -12,13 +12,35 @@ color_scheme: light
 search_enabled: true
 heading_anchors: true
 aux_links:
-  "GitHub Repository":
+  "OHMind Source":
+    - "https://github.com/lunyang/OHMind"
+  "Documentation Repository":
     - "https://github.com/lunyang/lunyang.github.io"
 
 # Footer content
-footer_content: "<strong>PolyAI Team</strong><br/>Copyright &copy; 2009-2025 Changchun Institute of Applied Chemistry, Chinese Academy of Sciences<br/>Address: No. 5625, Renmin Street, Changchun, Jilin, China. Postal Code: 130022"
+footer_content: "<strong>PolyAI Team</strong><br/>Copyright &copy; 2009-2026 Changchun Institute of Applied Chemistry, Chinese Academy of Sciences<br/>Address: No. 5625, Renmin Street, Changchun, Jilin, China. Postal Code: 130022"
 
 # Build settings
 exclude:
   - Gemfile
   - Gemfile.lock
+  - README.md
+  - scripts
+  - vendor
+  - .bundle
+
+url: "https://lunyang.github.io"
+baseurl: ""
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-include-cache
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: false
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

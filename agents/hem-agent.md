@@ -1,9 +1,10 @@
 ---
+permalink: /agents/hem-agent/
 title: "HEM Agent"
 description: "Specialized agent for Hydroxide Exchange Membrane design and PSO optimization"
 category: "agents"
 tags: ["hem", "pso", "optimization", "cation", "backbone"]
-last_updated: "2025-12-23"
+last_updated: "2026-09-23"
 version: "1.0.0"
 parent: Agent Reference
 nav_order: 2
@@ -269,10 +270,13 @@ The `best_solutions_*.csv` file contains:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [HEMDesign MCP Server](../mcp-servers/hem-server.md) - Tool documentation
-- [HEM Optimization Tutorial](../tutorials/hem-optimization.md) - Step-by-step guide
-- [OHPSO Module](../core-library/ohpso.md) - PSO implementation details
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [HEMDesign MCP Server]({% link mcp-servers/hem-server.md %}) - Tool documentation
+- [HEM Optimization Tutorial]({% link tutorials/hem-optimization.md %}) - Step-by-step guide
+- [OHPSO Module]({% link core-library/ohpso.md %}) - PSO implementation details
 
 ---
-*Last updated: 2025-12-22 | OHMind v1.0.0*
+
+## Recovery behavior
+
+The HEM tool now supports explicit optimizer checkpoint resume and bounded timeout retries. General agent failures may instead be classified and escalated with a proposed action; this is not a successful repair. Memory-based PSO selection and verified episode recording need explicit runtime integration. See [Recovery and Policies]({% link architecture/recovery.md %}).

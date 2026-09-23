@@ -1,4 +1,5 @@
 ---
+permalink: /agents/
 title: "Agent Reference"
 description: "Overview of OHMind's specialized agents and their capabilities"
 category: "agents"
@@ -69,14 +70,14 @@ graph TD
 
 | Agent | Purpose | MCP Server | Typical Use Cases |
 |-------|---------|------------|-------------------|
-| [Supervisor](./supervisor.md) | Route requests, task planning | None | All queries (entry point) |
-| [HEM Agent](./hem-agent.md) | HEM design & optimization | OHMind-HEMDesign | PSO optimization, backbone/cation selection |
-| [Chemistry Agent](./chemistry-agent.md) | Molecular operations | OHMind-Chem | SMILES conversion, molecular properties |
-| [QM Agent](./qm-agent.md) | Quantum chemistry | OHMind-ORCA | DFT calculations, geometry optimization |
-| [MD Agent](./md-agent.md) | Molecular dynamics | OHMind-GROMACS | MD simulations, trajectory analysis |
-| [Multiwfn Agent](./multiwfn-agent.md) | Wavefunction analysis | OHMind-Multiwfn | HOMO/LUMO, orbital visualization |
-| [RAG Agent](./rag-agent.md) | Literature search | None (Qdrant) | Scientific paper retrieval |
-| [Web Search Agent](./web-search-agent.md) | Web information | OHMind-Chem | Latest research, protocols |
+| [Supervisor]({% link agents/supervisor.md %}) | Route requests, task planning | None | All queries (entry point) |
+| [HEM Agent]({% link agents/hem-agent.md %}) | HEM design & optimization | OHMind-HEMDesign | PSO optimization, backbone/cation selection |
+| [Chemistry Agent]({% link agents/chemistry-agent.md %}) | Molecular operations | OHMind-Chem | SMILES conversion, molecular properties |
+| [QM Agent]({% link agents/qm-agent.md %}) | Quantum chemistry | OHMind-ORCA | DFT calculations, geometry optimization |
+| [MD Agent]({% link agents/md-agent.md %}) | Molecular dynamics | OHMind-GROMACS | MD simulations, trajectory analysis |
+| [Multiwfn Agent]({% link agents/multiwfn-agent.md %}) | Wavefunction analysis | OHMind-Multiwfn | HOMO/LUMO, orbital visualization |
+| [RAG Agent]({% link agents/rag-agent.md %}) | Literature search | None (Qdrant) | Scientific paper retrieval |
+| [Web Search Agent]({% link agents/web-search-agent.md %}) | Web information | OHMind-Chem | Latest research, protocols |
 
 ## Capabilities Matrix
 
@@ -131,10 +132,10 @@ Expensive operations require user approval:
 
 ## See Also
 
-- [Supervisor Agent](./supervisor.md) - Detailed routing logic
-- [Architecture Overview](../architecture/overview.md) - System architecture
-- [Multi-Agent System](../architecture/multi-agent-system.md) - LangGraph workflow
-- [MCP Servers](../mcp-servers/index.md) - Tool documentation
+- [Supervisor Agent]({% link agents/supervisor.md %}) - Detailed routing logic
+- [Architecture Overview]({% link architecture/overview.md %}) - System architecture
+- [Multi-Agent System]({% link architecture/multi-agent-system.md %}) - LangGraph workflow
+- [MCP Servers]({% link mcp-servers/index.md %}) - Tool documentation
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

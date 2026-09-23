@@ -1,4 +1,5 @@
 ---
+permalink: /agents/supervisor/
 title: "Supervisor Agent"
 description: "Central coordinator for routing requests and task planning"
 category: "agents"
@@ -236,9 +237,9 @@ use_structured = provider in ["openai", "azure"]
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [Multi-Agent System](../architecture/multi-agent-system.md) - LangGraph architecture
-- [State Management](../architecture/state-management.md) - AgentState schema
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [Multi-Agent System]({% link architecture/multi-agent-system.md %}) - LangGraph architecture
+- [State Management]({% link architecture/state-management.md %}) - AgentState schema
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

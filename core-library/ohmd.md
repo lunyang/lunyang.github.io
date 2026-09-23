@@ -1,4 +1,5 @@
 ---
+permalink: /core-library/ohmd/
 title: "OHMD Module"
 description: "Molecular dynamics utilities for HEM simulations with LAMMPS/GROMACS"
 category: "core-library"
@@ -552,10 +553,10 @@ work_dir/
 
 ## See Also
 
-- [Core Library Index](./index.md) - Module overview
-- [OHQM Module](./ohqm.md) - QM utilities
-- [MD Agent](../agents/md-agent.md) - Agent using OHMD
-- [GROMACS Server](../mcp-servers/gromacs-server.md) - MCP server tools
+- [Core Library Index]({% link core-library/index.md %}) - Module overview
+- [OHQM Module]({% link core-library/ohqm.md %}) - QM utilities
+- [MD Agent]({% link agents/md-agent.md %}) - Agent using OHMD
+- [GROMACS Server]({% link mcp-servers/gromacs-server.md %}) - MCP server tools
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

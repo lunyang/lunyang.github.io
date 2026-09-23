@@ -1,4 +1,5 @@
 ---
+permalink: /agents/web-search-agent/
 title: "Web Search Agent"
 description: "Specialized agent for real-time web information retrieval"
 category: "agents"
@@ -218,10 +219,10 @@ Use the RAG Agent for:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [RAG Agent](./rag-agent.md) - For literature search
-- [Chemistry Agent](./chemistry-agent.md) - For molecular operations
-- [Chem MCP Server](../mcp-servers/chem-server.md) - Tool documentation
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [RAG Agent]({% link agents/rag-agent.md %}) - For literature search
+- [Chemistry Agent]({% link agents/chemistry-agent.md %}) - For molecular operations
+- [Chem MCP Server]({% link mcp-servers/chem-server.md %}) - Tool documentation
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

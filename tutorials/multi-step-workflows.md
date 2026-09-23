@@ -1,4 +1,5 @@
 ---
+permalink: /tutorials/multi-step-workflows/
 title: "Multi-Step Workflows Tutorial"
 description: "Advanced guide to combining multiple OHMind agents for complex computational chemistry pipelines"
 category: "tutorials"
@@ -518,11 +519,11 @@ Let's diagnose the issue before continuing.
 
 ## See Also
 
-- [HEM Optimization](./hem-optimization.md) - Design basics
-- [QM Calculations](./qm-calculations.md) - QM methods
-- [MD Simulations](./md-simulations.md) - MD methods
-- [Literature Search](./literature-search.md) - Research integration
-- [Agent Reference](../agents/index.md) - Agent capabilities
+- [HEM Optimization]({% link tutorials/hem-optimization.md %}) - Design basics
+- [QM Calculations]({% link tutorials/qm-calculations.md %}) - QM methods
+- [MD Simulations]({% link tutorials/md-simulations.md %}) - MD methods
+- [Literature Search]({% link tutorials/literature-search.md %}) - Research integration
+- [Agent Reference]({% link agents/index.md %}) - Agent capabilities
 
 ---
 

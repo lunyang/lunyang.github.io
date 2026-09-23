@@ -1,4 +1,5 @@
 ---
+permalink: /troubleshooting/llm-issues/
 title: LLM Provider Issues
 description: "Solutions for AI model access, API errors, and response handling problems"
 parent: Troubleshooting
@@ -583,10 +584,10 @@ echo "=== Diagnostics Complete ==="
 
 ## See Also
 
-- [Troubleshooting Overview](./index.md) - Main troubleshooting guide
-- [Configuration Reference](../configuration/index.md) - Environment setup
-- [LLM Providers](../configuration/llm-providers.md) - Provider configuration
-- [Backend API](../api/backend-api.md) - API documentation
+- [Troubleshooting Overview]({% link troubleshooting/index.md %}) - Main troubleshooting guide
+- [Configuration Reference]({% link configuration/index.md %}) - Environment setup
+- [LLM Providers]({% link configuration/llm-providers.md %}) - Provider configuration
+- [Backend API]({% link api/backend-api.md %}) - API documentation
 
 ---
 

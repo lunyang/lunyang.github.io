@@ -1,4 +1,5 @@
 ---
+permalink: /tutorials/qm-calculations/
 title: "QM Calculations Tutorial"
 description: "Step-by-step guide to running quantum chemistry calculations with ORCA through OHMind"
 category: "tutorials"
@@ -519,10 +520,10 @@ LUMO energies and rank them by predicted alkaline stability.
 
 ## See Also
 
-- [QM Agent](../agents/qm-agent.md) - Agent capabilities
-- [ORCA MCP Server](../mcp-servers/orca-server.md) - Available tools
-- [OHQM Module](../core-library/ohqm.md) - QM utilities
-- [Multiwfn Analysis](./multi-step-workflows.md#wavefunction-analysis) - Advanced analysis
+- [QM Agent]({% link agents/qm-agent.md %}) - Agent capabilities
+- [ORCA MCP Server]({% link mcp-servers/orca-server.md %}) - Available tools
+- [OHQM Module]({% link core-library/ohqm.md %}) - QM utilities
+- [Multiwfn Analysis]({% link tutorials/multi-step-workflows.md %}#step-4-wavefunction-analysis) - Advanced analysis
 
 ---
 

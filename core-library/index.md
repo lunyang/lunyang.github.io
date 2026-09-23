@@ -1,4 +1,5 @@
 ---
+permalink: /core-library/
 title: "Core Library Reference"
 description: "Overview of OHMind's core Python library modules for HEM design"
 category: "core-library"
@@ -82,11 +83,11 @@ graph TD
 
 | Module | Purpose | Key Classes/Functions |
 |--------|---------|----------------------|
-| [OHVAE](./ohvae.md) | Junction Tree VAE for molecular generation | `JTNNVAE`, `MolTree`, `Vocab` |
-| [OHPSO](./ohpso.md) | Particle Swarm Optimization | `BasePSOptimizer`, `Swarm`, scoring functions |
-| [OHQM](./ohqm.md) | Quantum chemistry utilities | `qprep`, `cmin`, conformer search |
-| [OHMD](./ohmd.md) | Molecular dynamics utilities | `HEM_MD`, polymer building |
-| [OHScore](./ohscore.md) | Property prediction metrics | Validity, novelty, FCD metrics |
+| [OHVAE]({% link core-library/ohvae.md %}) | Junction Tree VAE for molecular generation | `JTNNVAE`, `MolTree`, `Vocab` |
+| [OHPSO]({% link core-library/ohpso.md %}) | Particle Swarm Optimization | `BasePSOptimizer`, `Swarm`, scoring functions |
+| [OHQM]({% link core-library/ohqm.md %}) | Quantum chemistry utilities | `qprep`, `cmin`, conformer search |
+| [OHMD]({% link core-library/ohmd.md %}) | Molecular dynamics utilities | `HEM_MD`, polymer building |
+| [OHScore]({% link core-library/ohscore.md %}) | Property prediction metrics | Validity, novelty, FCD metrics |
 
 ### Module Relationships
 
@@ -277,13 +278,13 @@ export PYTHONPATH=/path/to/OHMind:$PYTHONPATH
 
 ## See Also
 
-- [OHVAE Module](./ohvae.md) - Junction Tree VAE details
-- [OHPSO Module](./ohpso.md) - PSO optimization details
-- [OHQM Module](./ohqm.md) - QM utilities details
-- [OHMD Module](./ohmd.md) - MD utilities details
-- [OHScore Module](./ohscore.md) - Metrics details
-- [Architecture Overview](../architecture/overview.md) - System architecture
-- [MCP Servers](../mcp-servers/index.md) - Server documentation
+- [OHVAE Module]({% link core-library/ohvae.md %}) - Junction Tree VAE details
+- [OHPSO Module]({% link core-library/ohpso.md %}) - PSO optimization details
+- [OHQM Module]({% link core-library/ohqm.md %}) - QM utilities details
+- [OHMD Module]({% link core-library/ohmd.md %}) - MD utilities details
+- [OHScore Module]({% link core-library/ohscore.md %}) - Metrics details
+- [Architecture Overview]({% link architecture/overview.md %}) - System architecture
+- [MCP Servers]({% link mcp-servers/index.md %}) - Server documentation
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

@@ -1,4 +1,5 @@
 ---
+permalink: /agents/qm-agent/
 title: "QM Agent"
 description: "Specialized agent for quantum chemistry calculations via ORCA"
 category: "agents"
@@ -316,11 +317,11 @@ The following tools require validation before execution:
 
 ## See Also
 
-- [Agent Reference](./index.md) - Overview of all agents
-- [Multiwfn Agent](./multiwfn-agent.md) - For result analysis
-- [ORCA MCP Server](../mcp-servers/orca-server.md) - Tool documentation
-- [QM Calculations Tutorial](../tutorials/qm-calculations.md) - Step-by-step guide
-- [OHQM Module](../core-library/ohqm.md) - QM utilities
+- [Agent Reference]({% link agents/index.md %}) - Overview of all agents
+- [Multiwfn Agent]({% link agents/multiwfn-agent.md %}) - For result analysis
+- [ORCA MCP Server]({% link mcp-servers/orca-server.md %}) - Tool documentation
+- [QM Calculations Tutorial]({% link tutorials/qm-calculations.md %}) - Step-by-step guide
+- [OHQM Module]({% link core-library/ohqm.md %}) - QM utilities
 
 ---
 *Last updated: 2025-12-22 | OHMind v1.0.0*

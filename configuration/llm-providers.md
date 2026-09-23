@@ -1,4 +1,5 @@
 ---
+permalink: /configuration/llm-providers/
 title: "LLM Providers"
 description: "Guide to configuring LLM providers in OHMind including OpenAI, Azure OpenAI, and OpenAI-compatible APIs"
 category: "configuration"
@@ -414,10 +415,10 @@ LOG_LEVEL=DEBUG
 
 ## See Also
 
-- [Configuration Overview](./index.md) - Configuration system overview
-- [Environment Variables](./environment-variables.md) - All environment variables
-- [LLM Issues](../troubleshooting/llm-issues.md) - Troubleshooting guide
-- [RAG Agent](../agents/rag-agent.md) - Literature search configuration
+- [Configuration Overview]({% link configuration/index.md %}) - Configuration system overview
+- [Environment Variables]({% link configuration/environment-variables.md %}) - All environment variables
+- [LLM Issues]({% link troubleshooting/llm-issues.md %}) - Troubleshooting guide
+- [RAG Agent]({% link agents/rag-agent.md %}) - Literature search configuration
 
 ---
 

@@ -1,4 +1,5 @@
 ---
+permalink: /cli/workspace-sidebar/
 title: "Workspace Sidebar"
 description: "File browser and preview functionality in OHMind CLI"
 category: "cli"
@@ -235,9 +236,9 @@ python -m OHMind_cli
 
 ## See Also
 
-- [CLI Overview](./index.md) - Getting started with the CLI
-- [Keyboard Shortcuts](./keyboard-shortcuts.md) - All shortcuts
-- [Configuration](../configuration/workspace-setup.md) - Workspace configuration
+- [CLI Overview]({% link cli/index.md %}) - Getting started with the CLI
+- [Keyboard Shortcuts]({% link cli/keyboard-shortcuts.md %}) - All shortcuts
+- [Configuration]({% link configuration/workspace-setup.md %}) - Workspace configuration
 
 ---
 

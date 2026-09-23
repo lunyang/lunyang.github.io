@@ -1,4 +1,5 @@
 ---
+permalink: /architecture/mcp-integration/
 title: "MCP Integration"
 description: "Model Context Protocol integration, server architecture, and tool distribution in OHMind"
 category: "architecture"
@@ -359,10 +360,10 @@ Common environment variables for MCP servers:
 
 ## See Also
 
-- [System Overview](./overview.md) - High-level architecture
-- [Multi-Agent System](./multi-agent-system.md) - Agent workflow
-- [MCP Configuration](../configuration/mcp-config.md) - Detailed configuration guide
-- [MCP Server Reference](../mcp-servers/index.md) - Server documentation
+- [System Overview]({% link architecture/overview.md %}) - High-level architecture
+- [Multi-Agent System]({% link architecture/multi-agent-system.md %}) - Agent workflow
+- [MCP Configuration]({% link configuration/mcp-config.md %}) - Detailed configuration guide
+- [MCP Server Reference]({% link mcp-servers/index.md %}) - Server documentation
 
 ---
 

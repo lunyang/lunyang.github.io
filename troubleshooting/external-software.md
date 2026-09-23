@@ -1,4 +1,5 @@
 ---
+permalink: /troubleshooting/external-software/
 title: External Software Issues
 description: "Solutions for ORCA, GROMACS, and Multiwfn configuration and execution problems"
 parent: Troubleshooting
@@ -633,13 +634,13 @@ echo "=== Check Complete ==="
 
 ## See Also
 
-- [Troubleshooting Overview](./index.md) - Main troubleshooting guide
-- [Installation Issues](./installation-issues.md) - Setup problems
-- [MCP Issues](./mcp-issues.md) - Server connection problems
-- [Configuration Reference](../configuration/index.md) - Environment setup
-- [ORCA Server](../mcp-servers/orca-server.md) - ORCA MCP documentation
-- [GROMACS Server](../mcp-servers/gromacs-server.md) - GROMACS MCP documentation
-- [Multiwfn Server](../mcp-servers/multiwfn-server.md) - Multiwfn MCP documentation
+- [Troubleshooting Overview]({% link troubleshooting/index.md %}) - Main troubleshooting guide
+- [Installation Issues]({% link troubleshooting/installation-issues.md %}) - Setup problems
+- [MCP Issues]({% link troubleshooting/mcp-issues.md %}) - Server connection problems
+- [Configuration Reference]({% link configuration/index.md %}) - Environment setup
+- [ORCA Server]({% link mcp-servers/orca-server.md %}) - ORCA MCP documentation
+- [GROMACS Server]({% link mcp-servers/gromacs-server.md %}) - GROMACS MCP documentation
+- [Multiwfn Server]({% link mcp-servers/multiwfn-server.md %}) - Multiwfn MCP documentation
 
 ---
 
